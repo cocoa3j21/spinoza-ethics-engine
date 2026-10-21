@@ -1,0 +1,1299 @@
+{
+  "$schema": "../docs/axiom_theorem_database_design.md",
+  "system": "Spinoza_Ethics_Part_1_Pilot_v2",
+  "domain": "Philosophy",
+  "description": "スピノザ『エチカ』第1部 命題11周辺のパイロットデータ（新スキーマ準拠版: 出典・多層形式化・別証明・圧縮記録・独立検証状態を分離）",
+  "edition_metadata": {
+    "audited_sources_description": "Gebhardt版原本スキャン (1925), The Latin Library (版未確認), および Wikisource Latin (底本: Appuhn 1913) との機械的照合を実施",
+    "project_internal_data_provenance": "旧 'spinoza_ethics_part1.json' はWeb UI命題グラフ表示用に作成された日本語データであり、ラテン語本文は未収録（見出し語8件のみラテン語併記）であった。前回の「プロジェクト内収録ラテン語データ経由照合」はAIによる出所の事実誤認であった。",
+    "auditor": "AI assistant ※人間による検証済みではない",
+    "formalization_status": "Level 0 (自然言語) および Level 1 (命題ホーン節) はエンジン検証済み。Level 2 (一階述語論理) および Level 3 (様相論理) は未検証の草案 (unverified draft) である。"
+  },
+  "nodes": [
+    {
+      "id": "DEF_1",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "自己原因",
+        "la_or_original": "Causa sui",
+        "en": "Self-cause"
+      },
+      "category": "definition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Definitio I",
+        "original_text": "Per causam sui intelligo id, cujus essentia involvit existentiam, sive id, cujus natura non potest concipi, nisi existens.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 45",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "句読点・空白の差のみ"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは読点（カンマ）を省略している。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "自己原因とは、その本質が存在を含んでいるもの、あるいはその本性が存在するものとしてしか考えられないものを意味する。",
+        "level_1_propositional_horn": {
+          "atom": "DEF_1"
+        },
+        "level_2_first_order": "forall x (Causa_sui(x) <-> (Essence(x) -> Exists(x)))",
+        "level_3_modal_higher_order": "forall x (Causa_sui(x) <-> Box(Essence(x) -> Exists(x)))"
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "definition_type": "causal_genetic",
+        "philosophical_commentary": "本質が存在を含むという定義。思考上の言葉の取り決め（名目的定義）にとどまるのか、それとも実在の動的自己産出力を規定する実在的・因果的定義であるかが争点となる。",
+        "critical_objections": [
+          "カント的批判: 概念の中に存在を含めて定義しても、現実の対象が存在することの証明にはならない。"
+        ],
+        "scholarly_disputes": [
+          {
+            "issue": "因果的定義か名目的定義か",
+            "open_question": "自己原因の定義は単なる公称的言葉の取り決めか、それとも実在の動的生成を含む発生的定義か？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "DEF_3",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "実体",
+        "la_or_original": "Substantia",
+        "en": "Substance"
+      },
+      "category": "definition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Definitio III",
+        "original_text": "Per substantiam intelligo id, quod in se est, et per se concipitur: hoc est id, cujus conceptus non indiget conceptu alterius rei, a quo formari debeat.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 45, ll. 14–16",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "句読点・空白の差のみ"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "Gebhardt原本(Pag. 45, ll. 14–16)、TLL、および1677年初版(Opera Posthuma)ともに 'non indiget conceptu' であることを確認。旧パイロットの 'non eget' は誤写であったため原本通り修正。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "実体とは、それ自身のうちにあり、かつそれ自身によって考えられるものを意味する。すなわちその概念を形成するのに他のものの概念を必要としない。",
+        "level_1_propositional_horn": {
+          "atom": "DEF_3"
+        },
+        "level_2_first_order": "forall x (Substance(x) <-> (InItself(x) and ConceivedThroughItself(x)))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "definition_type": "real",
+        "philosophical_commentary": "他者に依存しない自立的存在・自立概念の規定。",
+        "scholarly_disputes": [
+          {
+            "issue": "概念的独立性と因果的独立性の関係",
+            "open_question": "『自身によって考えられる』という概念的独立性は、直ちに『他者から産出されない』という因果的独立性を論理的に含意するか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "DEF_6",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "神",
+        "la_or_original": "Deus",
+        "en": "God"
+      },
+      "category": "definition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Definitio VI",
+        "original_text": "Per Deum intelligo ens absolute infinitum, hoc est, substantiam constantem infinitis attributis, quorum unumquodque aeternam, et infinitam essentiam exprimit.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 45-46",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'æternam' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "神とは、絶対に無限なる存在、すなわち、それぞれが永遠かつ無限な本質を表現する無限に多くの属性から成る実体を意味する。",
+        "level_1_propositional_horn": {
+          "atom": "DEF_6"
+        },
+        "level_2_first_order": "forall x (God(x) <-> (Substance(x) and InfiniteAttributes(x)))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "definition_type": "real",
+        "philosophical_commentary": "無限の属性から成る実体。",
+        "scholarly_disputes": [
+          {
+            "issue": "無限属性の共存可能性",
+            "open_question": "無限に異なる属性が一つの実体において矛盾なく共存しうることは、定義から自明としてよいか、それとも事前の可能性証明が必要か？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "AX_4",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "因果認識公理",
+        "la_or_original": "Axioma IV",
+        "en": "Knowledge of cause and effect"
+      },
+      "category": "axiom",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Axioma IV",
+        "original_text": "Effectus cognitio a cognitione causae dependet, et eandem involvit.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 46",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'causæ' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "結果の認識は原因の認識に依存し、原因の認識を含む。",
+        "level_1_propositional_horn": {
+          "atom": "AX_4"
+        },
+        "level_2_first_order": "forall c, e (Effect(c, e) -> (Knows(e) -> Knows(c)))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "philosophical_commentary": "認識論的依存と存在論的因果を平行論的に結びつける公理。",
+        "scholarly_disputes": [
+          {
+            "issue": "理由と原因の同一視",
+            "open_question": "概念的包含関係（論理的理由）と客観的生成関係（物理的原因）を公理として同一視することは正当化されるか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "AX_5",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "無共通者の相互不可知公理",
+        "la_or_original": "Axioma V",
+        "en": "Things with nothing in common"
+      },
+      "category": "axiom",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Axioma V",
+        "original_text": "Quae nihil commune cum se invicem habent, etiam per se invicem intelligi non possunt, sive conceptus unius alterius conceptum non involvit.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 46",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'Quæ' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "互いに何の共通点も持たないものは、一方が他方を通じて理解されることはあり得ない。",
+        "level_1_propositional_horn": {
+          "atom": "AX_5"
+        },
+        "level_2_first_order": "forall x, y (NoCommon(x, y) -> not ConceivedThrough(x, y))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "philosophical_commentary": "概念的断絶の公理。",
+        "scholarly_disputes": [
+          {
+            "issue": "異属性間の相互作用の不可能性",
+            "open_question": "共通点を持たない実体間の因果否定は、心身問題（心身平行論）を必然的に導く十分な基礎となるか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "AX_7",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "非実在思考の公理",
+        "la_or_original": "Axioma VII",
+        "en": "Conceivability of non-existence"
+      },
+      "category": "axiom",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Axioma VII",
+        "original_text": "Quidquid ut non existens potest concipi, ejus essentia non involvit existentiam.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 47",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "綴りの差のみ (句読点・カンマの差)"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (句読点・カンマの差)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "Gebhardt原本は 'Quicquid, ut non existens, potest...' とカンマあり。パイロットおよびTLLはカンマなし。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "存在しないものとして考えられ得るものの本質は、存在を含まない。",
+        "level_1_propositional_horn": {
+          "atom": "AX_7"
+        },
+        "level_2_first_order": "forall x (CanConceiveNonExistence(x) -> not (Essence(x) -> Exists(x)))",
+        "level_3_modal_higher_order": "forall x (Diamond not Exists(x) -> not Box Exists(x))"
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "philosophical_commentary": "思考可能性と本質存在包含の対偶的関係を規定する公理。",
+        "scholarly_disputes": [
+          {
+            "issue": "思考可能性の客観的指標性",
+            "open_question": "人間知性による非存在の思考可能性は、対象の本質的非存在性を保証する指標として客観的に妥当か？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "綴りの差のみ (句読点・カンマの差)",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "SPIN_AX_RATIO",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "充足理由律 (存在と非存在の理由原理)",
+        "la_or_original": "Ratio cur existit vel non existit",
+        "en": "Principle of sufficient reason for existence and non-existence"
+      },
+      "category": "principle_in_proof",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardtテキスト (プロジェクト内収録データおよびWikisource経由照合 / 異読対照未実施)",
+        "locator": "Pars I, Propositio XI, Aliter (公理番号付き公理ではなく、命題11別証明本文で導入される理由原理)",
+        "original_text": "Cujuscunque rei assignari debet causa, seu ratio, tam cur existit, quam cur non existit.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 53 (PROP_11 Aliter 1 本文)",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "句読点・空白の差のみ"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "公理番号付き公理ではなく命題11別証明本文で導入される理由原理。TLLは読点（カンマ）を省略。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "いかなる事物についても、それが存在する理由・原因とともに、存在しない理由・原因が示されなければならない。",
+        "level_1_propositional_horn": {
+          "atom": "SPIN_AX_RATIO"
+        },
+        "level_2_first_order": "forall x (Exists(x) <-> not HasCauseOfNonExistence(x)) [未検証草案]",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [],
+      "interpretations": {
+        "philosophical_commentary": "スピノザ『エチカ』第1部の冒頭公理群（Axiomata I-VII）には含まれず、命題11の別証明1（第二証明）の本文中で導入される理由原理。非存在に対してもそれを阻害する実在的原因を要求する。",
+        "scholarly_disputes": [
+          {
+            "issue": "非存在に対する原因要求の正当性",
+            "open_question": "何かが存在しないことに対して『それを妨げる実在的原因』を要求する原理は、存在の必然性を先買いする形而上学的要請ではないか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "PROP_2",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "異属性実体の無共通性",
+        "la_or_original": "Propositio II",
+        "en": "Substances of different attributes have nothing in common"
+      },
+      "category": "proposition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Propositio II",
+        "original_text": "Duae substantiae, diversa attributa habentes, nihil inter se commune habent.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 47",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "Gebhardt原本(Pag. 47, ll. 9–10)、TLL、および1677年初版(Opera Posthuma)ともに 'nihil inter se commune habent' であることを確認。旧パイロットの語順逆転 ('commune inter se') を原本通り修正。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "異なる属性を持つ二つの実体は、互いに何の共通点も持たない。",
+        "level_1_propositional_horn": {
+          "atom": "PROP_2"
+        },
+        "level_2_first_order": "forall x, y (Substance(x) and Substance(y) and DistinctAttributes(x, y) -> NoCommon(x, y))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [
+        {
+          "variant_id": "proof_standard",
+          "label": "本文証明",
+          "direct_premises": [
+            "DEF_3"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "direct_deduction",
+            "skipped_intermediate_steps": [
+              "各実体はそれ自身のうちにありそれ自身によって考えられる（DEF_3）ゆえに、一方が他方の概念を含み得ないという論証ステップ"
+            ],
+            "compression_rationale": "DEF_3 から直接 PROP_2 を導出するホーン規則として圧縮。"
+          },
+          "external_proof_ref": null
+        }
+      ],
+      "interpretations": {
+        "scholarly_disputes": [
+          {
+            "issue": "属性の独立性と実体の一体性",
+            "open_question": "属性が互いに共通点を持たないならば、なぜ同一の実体の属性として結びつきうるのか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "PROP_3",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "無共通実体間の因果否定",
+        "la_or_original": "Propositio III",
+        "en": "Things with nothing in common cannot cause each other"
+      },
+      "category": "proposition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Propositio III",
+        "original_text": "Quae res nihil commune inter se habent, earum una alterius causa esse non potest.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 47",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'Quæ' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "互いに何の共通点も持たない物は、一方が他方の原因となることはできない。",
+        "level_1_propositional_horn": {
+          "atom": "PROP_3"
+        },
+        "level_2_first_order": "forall x, y (NoCommon(x, y) -> not (Cause(x, y) or Cause(y, x)))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [
+        {
+          "variant_id": "proof_standard",
+          "label": "本文証明",
+          "direct_premises": [
+            "AX_4",
+            "AX_5"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "reductio_ad_absurdum",
+            "skipped_intermediate_steps": [
+              "一方が他方の原因であると仮定すると公理4により結果の認識は原因の認識を含むが、公理5により無共通なら互いを通じて理解され得ないため矛盾するという背理法ステップ"
+            ],
+            "compression_rationale": "背理法推論を正の演繹規則 AX_4 and AX_5 -> PROP_3 として圧縮。"
+          },
+          "external_proof_ref": null
+        }
+      ],
+      "interpretations": {
+        "scholarly_disputes": [
+          {
+            "issue": "因果関係における類似性の原理",
+            "open_question": "『原因と結果は共通の性質を持たなければならない』という因果的類似性の原理はアプリオリに真であるか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "PROP_5",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "同属性実体単一の原理",
+        "la_or_original": "Propositio V",
+        "en": "There cannot be two substances with the same nature or attribute"
+      },
+      "category": "proposition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Propositio V",
+        "original_text": "In rerum natura non possunt dari duae, aut plures substantiae ejusdem naturae, sive attributi.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 48",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'duæ', 'substantiæ', 'naturæ' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "自然界には、同一の本性あるいは同一の属性を持つ二つ以上の実体は存在し得ない。",
+        "level_1_propositional_horn": {
+          "atom": "PROP_5"
+        },
+        "level_2_first_order": "forall x, y (Substance(x) and Substance(y) and ShareAttribute(x, y) -> (x == y))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [
+        {
+          "variant_id": "proof_standard",
+          "label": "本文証明 (パイロット縮約版)",
+          "direct_premises": [
+            "DEF_3",
+            "DEF_6"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "reductio_ad_absurdum",
+            "skipped_intermediate_steps": [
+              "実体の区別原理（PROP_4: 属性または様態の差異）、様態先線性（PROP_1）、公理6（AX_6: 真なる観念の一致）を用いた原典背理法ステップ",
+              "PROP_1およびPROP_4の背後にある公理・定義（AX_1: 存在の所在公理, DEF_4: 属性, DEF_5: 様態）"
+            ],
+            "compression_rationale": "【パイロット簡略化】原典上、命題5の証明本文で引用されているのは PROP_4, PROP_1, DEF_3, AX_6 であり、DEF_6（神の定義）への依存関係は原典上に根拠が存在しない。本パイロットでは12項目の限定スコープ内で完結させるための便宜的な「パイロット簡略化」として DEF_3, DEF_6 から直接導出する規則として接続している。この簡略化が影響する範囲は、PROP_5 を経由する『モデルAの本文証明ルート』および『モデルBの本文証明ルート（G2）』である（モデルC1およびモデルC2の系別証明ルートはPROP_5をバイパスするため影響を受けない）。"
+          },
+          "external_proof_ref": null
+        }
+      ],
+      "interpretations": {
+        "scholarly_disputes": [
+          {
+            "issue": "個体識別不可能性の原理との関係",
+            "open_question": "同属性実体の複数性の否定は、ライプニッツの同一性原理（不可識別者同一の原理）とどのように論理的に交差するか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "PROP_6",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "実体の他者産出不能性",
+        "la_or_original": "Propositio VI",
+        "en": "One substance cannot be produced by another"
+      },
+      "category": "proposition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Propositio VI, Demonstratio & Corollarium Aliter",
+        "original_text": "Una substantia non potest produci ab alia substantia.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 48",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "全文字完全一致。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "一つの実体は他の実体から産出されることはあり得ない。",
+        "level_1_propositional_horn": {
+          "atom": "PROP_6"
+        },
+        "level_2_first_order": "forall x, y (Substance(x) and Substance(y) and (x != y) -> not Causes(x, y))",
+        "level_3_modal_higher_order": null
+      },
+      "proof_variants": [
+        {
+          "variant_id": "proof_standard",
+          "label": "本文証明 (異属性・同属性の網羅)",
+          "direct_premises": [
+            "PROP_2",
+            "PROP_3",
+            "PROP_5"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "exhaustion",
+            "skipped_intermediate_steps": [
+              "同属性実体は存在せず（PROP_5）、異属性実体は因果関係を持てない（PROP_2, PROP_3）という場合分け網羅論証"
+            ],
+            "compression_rationale": "PROP_2 and PROP_3 and PROP_5 -> PROP_6 として圧縮。"
+          },
+          "external_proof_ref": null
+        },
+        {
+          "variant_id": "proof_aliter_corollary",
+          "label": "系・別証明 (因果認識公理と実体定義による背理法)",
+          "direct_premises": [
+            "DEF_3",
+            "AX_4"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "reductio_ad_absurdum",
+            "skipped_intermediate_steps": [
+              "実体が他者から産出されると仮定すると公理4により原因の認識に依存し、定義3の実体の自立概念性に反するという背理法ステップ"
+            ],
+            "compression_rationale": "背理法を正の演繹規則 DEF_3 and AX_4 -> PROP_6 として圧縮。"
+          },
+          "external_proof_ref": null
+        }
+      ],
+      "interpretations": {
+        "scholarly_disputes": [
+          {
+            "issue": "本文証明と系別証明の循環性・自立性",
+            "open_question": "系別証明（DEF_3とAX_4）のみで命題6が自立証明できるならば、本文証明で展開されたPROP_2, PROP_3, PROP_5の迂回ルートはなぜ必要とされたのか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "PROP_7",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "実体の必然的存在性",
+        "la_or_original": "Propositio VII",
+        "en": "Existence belongs to the nature of substance"
+      },
+      "category": "proposition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Propositio VII",
+        "original_text": "Ad naturam substantiae pertinet existere.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 49",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'substantiæ' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "実体の本性には存在することが属する（実体は自己原因であり必然的に存在する）。",
+        "level_1_propositional_horn": {
+          "atom": "PROP_7"
+        },
+        "level_2_first_order": "forall x (Substance(x) -> (Causa_sui(x) and Exists(x)))",
+        "level_3_modal_higher_order": "forall x (Substance(x) -> Box Exists(x))"
+      },
+      "proof_variants": [
+        {
+          "variant_id": "proof_standard",
+          "label": "本文証明",
+          "direct_premises": [
+            "PROP_6",
+            "DEF_1"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "direct_deduction",
+            "skipped_intermediate_steps": [
+              "実体は他者から産出されない（PROP_6）ゆえに自己原因（DEF_1）でなければならず、自己原因は本質が存在を含むゆえに存在するという二重の推論ステップ"
+            ],
+            "compression_rationale": "PROP_6 and DEF_1 -> PROP_7 として圧縮。"
+          },
+          "external_proof_ref": null
+        }
+      ],
+      "interpretations": {
+        "scholarly_disputes": [
+          {
+            "issue": "他者産出否定から自己原因への飛躍",
+            "open_question": "他者から産出されないという消極的事実から、直ちに自己原因（本質が存在を含む）という積極的実在性が導かれるか？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    },
+    {
+      "id": "PROP_11",
+      "namespace": "spinoza.ethica.p1",
+      "name": {
+        "ja": "神の必然的実在",
+        "la_or_original": "Propositio XI",
+        "en": "God necessarily exists"
+      },
+      "category": "proposition",
+      "source": {
+        "author": "Baruch de Spinoza",
+        "work": "Ethica Ordine Geometrico Demonstrata",
+        "edition": "Gebhardt (1925)",
+        "locator": "Pars I, Propositio XI, Demonstratio & Aliter",
+        "original_text": "Deus, sive substantia constans infinitis attributis, quorum unumquodque aeternam et infinitam essentiam exprimit, necessario existit.",
+        "primary_source_verified": true,
+        "verified_date": "2026-10-21",
+        "secondary_reference": null,
+        "audited_sources": [
+          {
+            "source_name": "Gebhardt (1925) 原本スキャン",
+            "edition": "Carl Gebhardt (Hrsg.), Spinoza Opera, Band II, Heidelberg: Carl Winter, 1925",
+            "locator": "S. 52-53",
+            "url_or_file": "https://archive.org/details/operaimauftragde0000spin_a9g0",
+            "match_status": "完全一致"
+          },
+          {
+            "source_name": "The Latin Library",
+            "edition": "版未確認 (サイト上に校訂版の明示的記載なし)",
+            "locator": "spinoza.ethica1.html",
+            "url_or_file": "https://www.thelatinlibrary.com/spinoza.ethica1.html",
+            "match_status": "綴りの差のみ (u/v, j/i, ae/oe等正規化で一致)"
+          },
+          {
+            "source_name": "Wikisource Latin",
+            "edition": "Charles Appuhn 仏訳対照版 (Paris: Garnier Frères, 1913.djvu)",
+            "locator": "Ethica/Pars_prima_-_De_Deo",
+            "url_or_file": "https://la.wikisource.org/wiki/Ethica/Pars_prima_-_De_Deo",
+            "match_status": "完全一致"
+          }
+        ],
+        "comparison_note": "TLLは合字 'æternam' を使用。"
+      },
+      "formalization_levels": {
+        "level_0_natural": "神、すなわち無限の属性から成る実体は、必然的に実在する。",
+        "level_1_propositional_horn": {
+          "atom": "PROP_11"
+        },
+        "level_2_first_order": "forall x (God(x) -> NecessaryExists(x))",
+        "level_3_modal_higher_order": "Box (exists x God(x))"
+      },
+      "proof_variants": [
+        {
+          "variant_id": "proof_standard",
+          "label": "本文証明 (第1証明: 実体必然存在性と非実在公理による背理法)",
+          "direct_premises": [
+            "PROP_7",
+            "DEF_6",
+            "AX_7"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "reductio_ad_absurdum",
+            "skipped_intermediate_steps": [
+              "神が存在しないと仮定すると公理7により本質が存在を含まないことになるが、神は実体（DEF_6）であるため命題7により本質が存在を含み矛盾するという背理法ステップ"
+            ],
+            "compression_rationale": "背理法を正の演繹規則 PROP_7 and DEF_6 and AX_7 -> PROP_11 として圧縮。"
+          },
+          "external_proof_ref": null
+        },
+        {
+          "variant_id": "proof_aliter_1",
+          "label": "別証明1 (第2証明: 充足理由律に基づく非存在阻害原因の不在)",
+          "direct_premises": [
+            "DEF_6",
+            "SPIN_AX_RATIO",
+            "PROP_2",
+            "PROP_3"
+          ],
+          "required_background_axioms": [],
+          "is_compressed": true,
+          "compression_record": {
+            "original_reasoning_type": "ratio_principle",
+            "skipped_intermediate_steps": [
+              "非存在にも理由が必要という充足理由律から、神の内に自己矛盾はなく（DEF_6）、外に阻害原因はない（PROP_2, PROP_3）ことから神の非存在原因の不存在を導く演繹ステップ"
+            ],
+            "compression_rationale": "充足理由律と無共通性から直接 PROP_11 を導くホーン規則として圧縮。"
+          },
+          "external_proof_ref": null
+        }
+      ],
+      "interpretations": {
+        "scholarly_disputes": [
+          {
+            "issue": "実体定義と必然的存在の演繹関係",
+            "open_question": "神の必然的存在の証明は、自己原因（DEF_1）や実体（DEF_3）、充足理由律（SPIN_AX_RATIO）の定義内容から概念的に自明として導かれるのか、それとも実質的な形而上学的実在の論証か？"
+          }
+        ]
+      },
+      "verification": {
+        "primary_source_matched": {
+          "is_matched": true,
+          "matched_sources": [
+            "Gebhardt (1925) 原本スキャン (Archive.org: operaimauftragde0000spin_a9g0)",
+            "The Latin Library (版未確認)",
+            "Wikisource Latin (底本: Appuhn 1913)"
+          ],
+          "comparison_result": "完全一致",
+          "audit_date": "2026-10-21",
+          "auditor": "AI assistant ※人間による検証済みではない"
+        },
+        "engine_dependencies_computed": {
+          "is_computed": true,
+          "engine_version": "v0.1",
+          "semantics_mode": "diagnostic_monotone",
+          "computed_date": "2026-10-21"
+        },
+        "externally_machine_verified": {
+          "is_verified": false,
+          "verifier_system": null,
+          "theorem_label": null,
+          "verification_date": null
+        }
+      }
+    }
+  ]
+}

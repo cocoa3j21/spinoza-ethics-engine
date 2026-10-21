@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>幾何学的哲学推論エンジン | Philosophy Geometric Engine</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <!-- Google Fonts for philosophical aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Vis-network CDN (フォールバック内蔵) -->
+  <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="logo-symbol">⬡</div>
+        <div class="brand-text">
+          <h1>PHILOSOPHY GEOMETRIC ENGINE</h1>
+          <span class="subtitle">客観的演繹関係の追跡と前提変更の再現可能分析</span>
+        </div>
+      </div>
+
+      <!-- Mode Selector Tabs (初期画面は「今回わかったこと」) -->
+      <nav class="mode-tabs" id="modeTabs">
+        <button class="mode-tab-btn" data-view="insights" id="tabViewInsights" style="display: none;">
+          <span class="icon">🎯</span> 今回わかったこと
+        </button>
+        <button class="mode-tab-btn active" data-view="graph" id="tabViewGraph">
+          <span class="icon">🕸️</span> 論理グラフ詳細
+        </button>
+        <button class="mode-tab-btn" data-view="benchmark" id="tabViewBenchmark" style="display: none;">
+          <span class="icon">⚖️</span> 耐震性比較
+        </button>
+        <button class="mode-tab-btn" data-view="research" id="tabViewResearch">
+          <span class="icon">🔬</span> 研究成果（保存済み実験）
+        </button>
+      </nav>
+    </header>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 1: 今回わかったこと (初心者向けまとめ・デフォルト表示) -->
+    <!-- ======================================================== -->
+    <section class="view-panel active" id="viewInsights">
+      <div class="insights-container">
+        <!-- Controls Bar -->
+        <div class="insights-controls">
+          <div class="control-group">
+            <label class="control-label">検証する哲学体系:</label>
+            <div class="system-select-buttons" id="insightsSystemButtons">
+              <button class="sys-btn active" data-sys="Descartes">デカルト (二元論)</button>
+              <button class="sys-btn" data-sys="Spinoza">スピノザ (一元論)</button>
+              <button class="sys-btn" data-sys="Leibniz">ライプニッツ (予定調和)</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="scenarioSelect">試した批判シナリオ:</label>
+            <select id="scenarioSelect" class="scenario-dropdown"></select>
+          </div>
+
+          <div class="control-group control-right">
+            <button id="btnSwitchToGraph" class="btn btn-outline-primary" title="この体系の完全な論理グラフを表示">
+              <span>全体グラフを見る ➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Warning Strip (未収束・根拠不整合・未完了の警告: カードより上に表示) -->
+        <div id="insightsWarningStrip" class="warning-strip" style="display: none;"></div>
+
+        <!-- SECTION A: 今回わかったこと (重要な結果カード 最大3件) -->
+        <section class="insights-section" id="sectionCards">
+          <div class="section-title-bar">
+            <div class="section-title-wrap">
+              <span class="section-badge">A</span>
+              <h2>今回わかったこと</h2>
+            </div>
+            <span class="section-desc">専門知識がなくても分かる、モデル検証で判明した重要事項</span>
+          </div>
+
+          <div id="cardsContainer" class="cards-grid">
+            <div class="loading-box">検証結果を集計中...</div>
+          </div>
+        </section>
+
+        <!-- SECTION B: 変更前と変更後 -->
+        <section class="insights-section" id="sectionBeforeAfter">
+          <div class="section-title-bar">
+            <div class="section-title-wrap">
+              <span class="section-badge">B</span>
+              <h2>変更前と変更後</h2>
+            </div>
+            <span class="section-desc">同じモデル・同じ意味論における、批判前後の支持状態の差分</span>
+          </div>
+
+          <div class="comparison-note" id="comparisonNote">
+            同一モデル・同一推論意味論（2ビット支持モデル）のもとで批判の有無のみを比較しています。
+          </div>
+
+          <!-- 適用された変更内容 -->
+          <div class="applied-changes-box">
+            <h4 class="sub-heading">🔧 適用された前提変更・規則無効化</h4>
+            <div id="appliedChangesList" class="changes-list"></div>
+          </div>
+
+          <!-- 3分類の差分集計カード (アコーディオン) -->
+          <div class="diff-summary-grid">
+            <!-- 1. 支持が失われた定理 -->
+            <div class="diff-card diff-lost">
+              <div class="diff-card-header" onclick="toggleDiffList('listLost')">
+                <div class="diff-card-title">
+                  <span class="diff-icon">❌</span>
+                  <span>肯定根拠が失われた定理</span>
+                </div>
+                <div class="diff-card-meta">
+                  <span class="diff-count" id="countLost">0</span>
+                  <span class="diff-toggle-arrow">▼</span>
+                </div>
+              </div>
+              <div class="diff-card-desc">以前は導出されていたが、批判により証明が途切れて根拠なし（UNKNOWN）となった命題</div>
+              <div class="diff-card-list" id="listLost" style="display: none;"></div>
+            </div>
+
+            <!-- 2. 支持が残った定理 -->
+            <div class="diff-card diff-retained">
+              <div class="diff-card-header" onclick="toggleDiffList('listRetained')">
+                <div class="diff-card-title">
+                  <span class="diff-icon">✅</span>
+                  <span>肯定根拠が残った定理</span>
+                </div>
+                <div class="diff-card-meta">
+                  <span class="diff-count" id="countRetained">0</span>
+                  <span class="diff-toggle-arrow">▼</span>
+                </div>
+              </div>
+              <div class="diff-card-desc">批判の対象外であるか、別の証明経路（別証明）によって肯定根拠が維持された命題</div>
+              <div class="diff-card-list" id="listRetained" style="display: none;"></div>
+            </div>
+
+            <!-- 3. 否定支持が加わった定理 (矛盾) -->
+            <div class="diff-card diff-conflict">
+              <div class="diff-card-header" onclick="toggleDiffList('listConflict')">
+                <div class="diff-card-title">
+                  <span class="diff-icon">⚡</span>
+                  <span>否定支持が加わった定理 (衝突)</span>
+                </div>
+                <div class="diff-card-meta">
+                  <span class="diff-count" id="countConflict">0</span>
+                  <span class="diff-toggle-arrow">▼</span>
+                </div>
+              </div>
+              <div class="diff-card-desc">肯定根拠と否定根拠の両方が成立し、二律背反（CONFLICT）となった命題</div>
+              <div class="diff-card-list" id="listConflict" style="display: none;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION C: なぜそうなった？ (証明経路の分析) -->
+        <section class="insights-section" id="sectionWhy">
+          <div class="section-title-bar">
+            <div class="section-title-wrap">
+              <span class="section-badge">C</span>
+              <h2>なぜそうなった？</h2>
+            </div>
+            <span class="section-desc">止まった証明経路と、生き残った別証明経路の対比</span>
+          </div>
+
+          <div class="why-routes-container" id="whyRoutesContainer"></div>
+        </section>
+
+        <!-- SECTION D: 詳しい証拠 (折りたたみ表示) -->
+        <section class="insights-section" id="sectionEvidence">
+          <div class="section-title-bar">
+            <div class="section-title-wrap">
+              <span class="section-badge">D</span>
+              <h2>詳しい証拠と検証記録</h2>
+            </div>
+            <span class="section-desc">学術的透明性のための原典位置、命題・規則ID、再現コード</span>
+          </div>
+
+          <details class="evidence-details" id="evidenceDetails">
+            <summary class="evidence-summary">
+              <span class="summary-icon">📁</span>
+              <span class="summary-text">証拠データを展開する（命題ID、原典位置、推論意味論、評価完了性、再現コード）</span>
+            </summary>
+
+            <div class="evidence-content" id="evidenceContent"></div>
+          </details>
+        </section>
+
+        <!-- Epistemic & Terminology Footer -->
+        <footer class="insights-footer">
+          <div class="term-legend-box">
+            <h4>📖 本システムにおける言葉の定義（日本語表示の基準）</h4>
+            <ul class="term-list">
+              <li><strong>肯定する根拠あり（TRUE）</strong>: 登録されたモデル内で、前提から結論への有効な証明規則が成立している状態。</li>
+              <li><strong>否定する根拠あり（FALSE）</strong>: 登録されたモデル内で、否定を導く有効な規則や反証根拠が成立している状態。</li>
+              <li><strong>肯定・否定とも根拠が得られていない（UNKNOWN）</strong>: 現時点のモデルでは証明も反証も得られていない状態（「間違い」を意味しません）。</li>
+              <li><strong>肯定・否定の両方に根拠あり（CONFLICT）</strong>: 肯定の証明と否定の批判が同時に成立し、二律背反となっている状態。</li>
+            </ul>
+            <p class="term-note">※ 「根拠」とは、登録された有限の公理・定義から形式的に導出された関係を指し、客観的真理性や哲学者の優劣を決定するものではありません。</p>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 2: 論理グラフ詳細 (従来の全体グラフ＆インスペクタ) -->
+    <!-- ======================================================== -->
+    <section class="view-panel" id="viewGraph">
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="system-meta" id="systemMeta">
+          <span class="system-title" id="currentSystemTitle">スピノザ 『エチカ』第1部</span>
+          <span class="system-desc" id="currentSystemDesc">実体一元論・心身平行論・幾何学的演繹の金字塔</span>
+        </div>
+
+        <!-- System selector for graph -->
+        <div class="system-pills" id="graphSystemTabs">
+          <button class="pill-btn active" data-system="Spinoza">スピノザ</button>
+          <button class="pill-btn" data-system="Descartes">デカルト</button>
+          <button class="pill-btn" data-system="Leibniz">ライプニッツ</button>
+          <button class="pill-btn" data-system="Kant">カント</button>
+        </div>
+
+        <div class="action-buttons">
+          <button id="btnApproveDefs" class="btn btn-secondary" title="全定義を前提として承認し、定理を演繹">
+            <span class="icon">✨</span> 定義を一括承認
+          </button>
+          <button id="btnInjectKant" class="btn btn-danger" title="カントの批判公理を注入し崩壊度をシミュレーション">
+            <span class="icon">⚡</span> カント批判を注入
+          </button>
+          <button id="btnReset" class="btn btn-ghost" title="初期状態に戻す">
+            <span class="icon">🔄</span> リセット
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Workspace -->
+      <main class="main-workspace">
+        <!-- Graph View Pane -->
+        <section class="graph-pane">
+          <!-- Semantics & Scenario Strip -->
+          <div class="semantics-strip" id="semanticsStrip" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 14px; background: rgba(30, 41, 59, 0.7); border-bottom: 1px solid var(--border); font-size: 12px; color: var(--text-muted);">
+            <div>
+              <span>推論意味論: <strong id="graphSemanticsMode" style="color: #38bdf8;">v0.1 diagnostic_monotone</strong></span>
+              <span style="margin-left: 12px;">状態: <strong id="graphEvalStatus" style="color: #34d399;">CONVERGED</strong></span>
+            </div>
+            <div>
+              <span>シナリオ: <strong id="graphScenarioName" style="color: #f1f5f9;">ベースライン (全前提採用)</strong></span>
+            </div>
+          </div>
+
+          <!-- Status Bar -->
+          <div class="status-strip">
+            <div class="stat-badge">
+              <span class="stat-label">ノード総数</span>
+              <span class="stat-value" id="statTotalNodes">0</span>
+            </div>
+            <div class="stat-badge stat-true">
+              <span class="stat-label">肯定根拠あり (TRUE)</span>
+              <span class="stat-value" id="statTrueCount">0</span>
+            </div>
+            <div class="stat-badge stat-unknown">
+              <span class="stat-label">根拠なし (UNKNOWN)</span>
+              <span class="stat-value" id="statUnknownCount">0</span>
+            </div>
+            <div class="stat-badge stat-false">
+              <span class="stat-label">否定根拠あり (FALSE)</span>
+              <span class="stat-value" id="statFalseCount">0</span>
+            </div>
+            <div class="stat-badge stat-conflict">
+              <span class="stat-label">矛盾衝突 (CONFLICT)</span>
+              <span class="stat-value" id="statConflictCount">0</span>
+            </div>
+            <div class="stat-badge stat-survival">
+              <span class="stat-label">定理生存率</span>
+              <div class="survival-meter">
+                <div class="survival-bar" id="statSurvivalBar" style="width: 0%"></div>
+              </div>
+              <span class="stat-value" id="statSurvivalRate">0%</span>
+            </div>
+          </div>
+
+          <!-- Graph Container -->
+          <div class="graph-container" id="graphContainer">
+            <div id="visNetwork" class="vis-network-canvas"></div>
+            <svg id="svgFallback" class="svg-canvas" style="display: none;"></svg>
+          </div>
+
+          <!-- Legend -->
+          <div class="graph-legend">
+            <div class="legend-group">
+              <span class="legend-title">種別:</span>
+              <span class="legend-item"><span class="legend-dot shape-axiom"></span> 公理 (Axiom)</span>
+              <span class="legend-item"><span class="legend-dot shape-def"></span> 定義 (Definition)</span>
+              <span class="legend-item"><span class="legend-dot shape-prop"></span> 定理 (Proposition)</span>
+            </div>
+            <div class="legend-group">
+              <span class="legend-title">状態:</span>
+              <span class="legend-item"><span class="legend-dot val-true"></span> 肯定根拠あり (TRUE)</span>
+              <span class="legend-item"><span class="legend-dot val-unknown"></span> 根拠なし (UNKNOWN)</span>
+              <span class="legend-item"><span class="legend-dot val-false"></span> 否定根拠あり (FALSE)</span>
+              <span class="legend-item"><span class="legend-dot val-conflict"></span> 矛盾衝突 (CONFLICT)</span>
+            </div>
+            <div class="legend-tip">
+              💡 ノードをクリックすると右パネルで詳細閲覧・What-Ifシミュレーションが可能です
+            </div>
+          </div>
+        </section>
+
+        <!-- Inspector Sidebar -->
+        <aside class="inspector-sidebar" id="inspectorSidebar">
+          <div class="inspector-header">
+            <h2 class="sidebar-title">命題インスペクタ</h2>
+            <span class="inspector-subtitle">ノードを選択して詳細を解析</span>
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-state" id="inspectorEmpty">
+            <div class="empty-icon">⬡</div>
+            <p>グラフ上のノードをクリックしてください。<br>定義・公理・定理の演繹構造や論理式、反実仮想シミュレーションを操作できます。</p>
+          </div>
+
+          <!-- Node Details -->
+          <div class="node-details" id="nodeDetails" style="display: none;">
+            <div class="node-meta">
+              <span class="node-type-badge" id="detailType">Axiom</span>
+              <span class="node-id-badge" id="detailId">AX_1</span>
+              <div class="node-value-badge" id="detailValueBadge">TRUE</div>
+            </div>
+
+            <h3 class="node-title" id="detailTitle">命題タイトル</h3>
+
+            <div class="detail-section">
+              <label class="section-label">日本語テキスト / 内容</label>
+              <div class="text-box" id="detailTextJa"></div>
+            </div>
+
+            <div class="detail-section">
+              <label class="section-label">幾何学的論理式 (Logical Form)</label>
+              <pre class="code-box"><code id="detailLogicalForm"></code></pre>
+            </div>
+
+            <div class="detail-section">
+              <label class="section-label">前提ノード (Dependencies)</label>
+              <div class="dep-list" id="detailDependencies"></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Interactive Action Panel -->
+            <div class="inspector-actions">
+              <h4 class="action-heading">🔮 対話的思考実験・探索</h4>
+
+              <!-- 前提採用トグル (公理・定義用) -->
+              <div class="action-block" id="premiseToggleBlock" style="display: none; background: rgba(15, 23, 42, 0.6); padding: 10px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+                <label class="action-label" style="font-weight: 600;">前提の採用状況:</label>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+                  <span id="premiseStatusText" style="font-size: 13px; font-weight: 600; color: #10b981;">採用中 (ACTIVE)</span>
+                  <button id="btnTogglePremise" class="btn btn-secondary btn-sm">
+                    この前提を採用しない
+                  </button>
+                </div>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.4;">
+                  ※ 「不採用」は前提の正支持を取り消す操作（UNKNOWN化）であり、否定支持（FALSE）を追加する操作とは異なります。
+                </p>
+              </div>
+
+              <!-- 定理用インフォ -->
+              <div class="action-block" id="propositionNoticeBlock" style="display: none; background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+                <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                  ℹ️ 定理は前提から演繹導出される命題のため直接トグルできません。前提の採用状態に応じて自動計算されます。
+                </p>
+              </div>
+
+              <div class="action-block" style="margin-top: 10px;">
+                <button id="btnWhatIfFalse" class="btn btn-warning-soft btn-full">
+                  <span>💭 もしこの命題を否定 (FALSE) したら？ (反実仮想)</span>
+                </button>
+              </div>
+
+              <div class="action-block" id="frontierBlock">
+                <button id="btnFindFrontier" class="btn btn-primary-soft btn-full">
+                  <span>🎯 この定理の最小成立要件を逆算探索</span>
+                </button>
+              </div>
+
+              <div class="simulation-result" id="simulationResult" style="display: none;">
+                <div class="result-header">
+                  <span class="result-title" id="simResultTitle">反実仮想シミュレーション結果</span>
+                  <button class="btn-close-sm" id="btnCloseSimResult">✕</button>
+                </div>
+                <div class="result-body" id="simResultBody"></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 4: 研究成果 (保存済み実験結果: スピノザ別証明 ＆ 幾何学再現) -->
+    <!-- ======================================================== -->
+    <section class="view-panel" id="viewResearch" style="overflow-y: auto; padding: 24px;">
+      <div class="insights-container" style="max-width: 1200px; margin: 0 auto;">
+        
+        <!-- ヘッダーと保存済み実験結果の明示 -->
+        <header class="section-title-bar" style="margin-bottom: 20px;">
+          <div class="section-title-wrap">
+            <span class="section-badge" style="background: #3b82f6;">🔬</span>
+            <h2 style="font-size: 22px;">保存済み研究成果・比較実験レポート</h2>
+          </div>
+          <span class="section-desc">推論意味論 v0.1 diagnostic_monotone 及び grounds_and_cuts による静的検証記録</span>
+        </header>
+
+        <!-- 免責・保存結果明示ストリップ -->
+        <div class="warning-strip" style="background: rgba(30, 41, 59, 0.7); border: 1px solid #3b82f6; border-radius: 8px; padding: 12px 18px; margin-bottom: 24px; font-size: 13px; line-height: 1.6; color: #cbd5e1;">
+          <strong style="color: #60a5fa;">📋 保存済み実験結果の表示方針:</strong>
+          本画面に表示されるデータは、独立した検証処理によって事前に生成・保存された構造化記録（<code>docs/*.json</code>）です。<br>
+          現在の論理グラフ画面における一時的な前提トグル操作とは連動しません。不明な情報は創作せず、検証記録通りの数値を表示します。
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- サブセクション A: スピノザ命題11 別証明比較実験 -->
+        <!-- ==================================================== -->
+        <section class="insights-section" style="margin-bottom: 36px; background: rgba(16, 21, 34, 0.8); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 24px;">
+          <div class="section-title-bar" style="margin-bottom: 16px;">
+            <div class="section-title-wrap">
+              <span class="section-badge" style="background: #a855f7;">A</span>
+              <h3 style="font-size: 18px; color: #f8fafc;">スピノザ『エチカ』命題11 別証明追加による比較実験</h3>
+            </div>
+            <span class="section-desc">A：基準モデル、B：命題11の第二証明を追加、C1：命題6の系の別証明を追加、C2：上記二つの別証明を追加</span>
+          </div>
+
+          <!-- 最初に見せる結論バナー -->
+          <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%); border-left: 4px solid #a855f7; border-radius: 6px; padding: 14px 18px; margin-bottom: 20px;">
+            <div style="font-size: 15px; font-weight: 700; color: #e9d5ff; line-height: 1.5;">
+              💡 今回のモデル比較で分かったこと: 「途中の補題の別証明を登録すると、以前は必須に見えた命題2・3を迂回できた」
+            </div>
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 6px; line-height: 1.5;">
+              命題11の第二証明を追加（モデルB）しただけでは命題2・3の遮断を回避できませんでしたが、命題6の系の別証明も合わせて追加（モデルC2）したことで、命題2・3を一切経由しない独立な証明経路が成立しました。
+            </div>
+          </div>
+
+          <div id="spinozaResearchContainer">
+            <div style="text-align: center; color: var(--text-muted); padding: 20px;">スピノザ実験データを読み込み中...</div>
+          </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- サブセクション B: 幾何学の再現実験 -->
+        <!-- ==================================================== -->
+        <section class="insights-section" style="background: rgba(16, 21, 34, 0.8); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 24px;">
+          <div class="section-title-bar" style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="section-title-wrap">
+              <span class="section-badge" style="background: #10b981;">B</span>
+              <h3 style="font-size: 18px; color: #f8fafc;">幾何学の再現実験: ポアンカレ円板モデル固定三角形反例</h3>
+            </div>
+            <span class="section-badge" style="background: #059669; font-size: 11px; padding: 3px 10px; border-radius: 4px; color: #ffffff; font-weight: 600;">既知の結果の再現</span>
+          </div>
+
+          <div id="geometryResearchContainer">
+            <div style="text-align: center; color: var(--text-muted); padding: 20px;">幾何学実験データを読み込み中...</div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- Benchmark Modal -->
+    <div class="modal-overlay" id="benchmarkModal" style="display: none;">
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">🏛️</span>
+            <h2>カント批判に対する近代合理論 耐震性ベンチマーク</h2>
+          </div>
+          <button class="modal-close-btn" id="btnCloseModal">✕</button>
+        </div>
+        <div class="modal-body" id="benchmarkModalBody">
+          <div class="modal-loading">ベンチマークデータを計算中...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+  </div>
+
+  <script src="app.js?v=3"></script>
+</body>
+</html>

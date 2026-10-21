@@ -1,0 +1,940 @@
+{
+  "status": "success",
+  "message": "スピノザ研究成果 v0.2 確定版",
+  "data": {
+    "version": "v0.2",
+    "dataset": "data/spinoza_ethics_part1_split_prop6.json",
+    "title": "スピノザ『エチカ』第1部 命題11別証明比較検証 (v0.2 確定版)",
+    "description": "命題6本文と系を独立ノードに分離し、PROP_5の修正（AX_6追加・DEF_6除外）を行った正式データ候補に基づく検証記録",
+    "parameters_note": "本画面の件数・数値は【設定(a)・DEF_6補完あり】の値です。モデル化の範囲（全26命題体系か縮約パイロットか）や解釈設定により件数は変動します。",
+    "findings_classification": {
+      "methodological_properties": [
+        {
+          "title": "真理値遷移の非対称性 (否定支持の非発生)",
+          "detail": "前提や規則が遮断されて支持を失った命題は常にUNKNOWNとなり、否定支持(FALSE)は生じない。スピノザの論証についての結果ではなく、エンジンの意味論の性質。",
+          "models": "全モデル・全設定 (単調性意味論)",
+          "source_ref": "推論エンジンの公理的設計仕様"
+        }
+      ],
+      "robust_findings": [
+        {
+          "title": "命題2・3・公理5の迂回可能性",
+          "detail": "命題6の系の別証明（または全別証明統合）を導入した場合、公理4等により、命題2・命題3・公理5を経由しない証明経路が存在する。※迂回経路の存在は証明を足しても崩れません。",
+          "models": "モデルC1, C2 (全設定)",
+          "source_ref": "Ethica I, Prop. 6, Corollarium, Demonstratio aliter / Prop. 11, Aliter"
+        },
+        {
+          "title": "命題6本文導出の迂回可能性",
+          "detail": "命題6本文の導出に必要な前提は7件(AX_1, 4, 5, 6, DEF_3, 4, 5)であるが、系の別証明が使う前提はDEF_3とAX_4の2件のみ。C1での命題11全体は5前提(DEF_6補完あり)で成立する。",
+          "models": "モデルC1, C2",
+          "source_ref": "Ethica I, Prop. 6, Corollarium, Demonstratio aliter"
+        },
+        {
+          "title": "DEF_3の必須性 (登録済み3ルートの範囲)",
+          "detail": "登録済みの3ルート(第1証明、系の別証明、別証明1)の範囲で、報告された全モデル・全設定で共通前提かつ単体遮断。※命題11の第3証明は未登録のため、全証明で必須とは言えない。単体遮断・共通前提は証明を足すと弱まりうる。",
+          "models": "全モデル (A, B, C1, C2) および全設定 (a〜d)",
+          "source_ref": "Ethica I, Def. 3"
+        },
+        {
+          "title": "第1証明単独時の前提不可欠性",
+          "detail": "単一証明モデルではDEF_6の補完を含む場合は全10前提が単体遮断となり、どの1つが欠けても命題11を導出できない(DEF_6を外した場合は9前提)。",
+          "models": "モデルA",
+          "source_ref": "Ethica I, Prop. 11, Demonstratio (および Prop. 1〜7)"
+        }
+      ],
+      "interpretation_dependent_findings": [
+        {
+          "title": "モデルBにおける迂回可否",
+          "detail": "命題11別証明のみのモデルBでは、命題2は全設定で迂回不可。命題3と公理5は、別証明1で命題3を補完しない設定(c)のみ迂回可能。",
+          "models": "モデルB: 命題2は全設定で不可 / 命題3・公理5は設定(c)のみ可",
+          "source_ref": "Ethica I, Prop. 11, Aliter (命題3引用の補完解釈)"
+        },
+        {
+          "title": "自己原因 (DEF_1) からの独立性",
+          "detail": "命題11別証明1で命題7を含めない解釈では自己原因に非依存な経路が成立するが、命題7を含める解釈では依存が維持される。",
+          "models": "設定(a),(c) で成立 / 設定(b),(d) で不成立",
+          "source_ref": "Ethica I, Prop. 11, Aliter (命題7言及の要否解釈)"
+        },
+        {
+          "title": "神の定義 (DEF_6) の必須性",
+          "detail": "命題11第1証明でDEF_6を補完前提として残す解釈では必須(単体遮断)となるが、外す解釈では共通前提・単体遮断から脱落する。",
+          "models": "DEF_6補完あり版で必須 / 外し版で非必須",
+          "source_ref": "Ethica I, Prop. 11, Demonstratio (証明本文に引用なし)"
+        },
+        {
+          "title": "共通前提の件数変動",
+          "detail": "モデルC2において、別証明1の解釈設定により共通前提数が2件から4件まで変動する。",
+          "models": "モデルC2 (設定c: 2件, 設定a: 3件, 設定b/d: 4件)",
+          "source_ref": "Ethica I, Prop. 11, Aliter (補完前提の範囲)"
+        }
+      ]
+    },
+    "models": {
+      "model_a": {
+        "model_name": "モデルA (基準: 単一証明)",
+        "description": "原典本文の基本証明経路のみ",
+        "grounds": [
+          [
+            "AX_1",
+            "AX_4",
+            "AX_5",
+            "AX_6",
+            "AX_7",
+            "DEF_1",
+            "DEF_3",
+            "DEF_4",
+            "DEF_5",
+            "DEF_6"
+          ]
+        ],
+        "common_premises": [
+          "AX_1",
+          "AX_4",
+          "AX_5",
+          "AX_6",
+          "AX_7",
+          "DEF_1",
+          "DEF_3",
+          "DEF_4",
+          "DEF_5",
+          "DEF_6"
+        ],
+        "premise_cuts": [
+          [
+            "AX_1"
+          ],
+          [
+            "AX_4"
+          ],
+          [
+            "AX_5"
+          ],
+          [
+            "AX_6"
+          ],
+          [
+            "AX_7"
+          ],
+          [
+            "DEF_1"
+          ],
+          [
+            "DEF_3"
+          ],
+          [
+            "DEF_4"
+          ],
+          [
+            "DEF_5"
+          ],
+          [
+            "DEF_6"
+          ]
+        ],
+        "rule_cuts": [
+          [
+            "R_PROP_1"
+          ],
+          [
+            "R_PROP_11"
+          ],
+          [
+            "R_PROP_2"
+          ],
+          [
+            "R_PROP_3"
+          ],
+          [
+            "R_PROP_4"
+          ],
+          [
+            "R_PROP_5"
+          ],
+          [
+            "R_PROP_6"
+          ],
+          [
+            "R_PROP_6_COROLLARY_1"
+          ],
+          [
+            "R_PROP_7"
+          ]
+        ],
+        "r_prop_2_cut": true,
+        "r_prop_3_cut": true,
+        "r2_bypass_status": "迂回不可 (単体遮断)",
+        "r3_bypass_status": "迂回不可 (単体遮断)",
+        "model_b_r3_bypass_note": null
+      },
+      "model_b": {
+        "model_name": "モデルB (命題11別証明 Aliter 1 追加)",
+        "description": "命題11の別証明 (R_PROP_11_ALITER1) を追加",
+        "grounds": [
+          [
+            "AX_4",
+            "AX_5",
+            "DEF_3",
+            "DEF_6",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "AX_1",
+            "AX_4",
+            "AX_5",
+            "AX_6",
+            "AX_7",
+            "DEF_1",
+            "DEF_3",
+            "DEF_4",
+            "DEF_5",
+            "DEF_6"
+          ]
+        ],
+        "common_premises": [
+          "AX_4",
+          "AX_5",
+          "DEF_3",
+          "DEF_6"
+        ],
+        "premise_cuts": [
+          [
+            "AX_4"
+          ],
+          [
+            "AX_5"
+          ],
+          [
+            "DEF_3"
+          ],
+          [
+            "DEF_6"
+          ],
+          [
+            "AX_1",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "AX_6",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "AX_7",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "DEF_1",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "DEF_4",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "DEF_5",
+            "SPIN_AX_RATIO"
+          ]
+        ],
+        "rule_cuts": [
+          [
+            "R_PROP_2"
+          ],
+          [
+            "R_PROP_3"
+          ],
+          [
+            "R_PROP_1",
+            "R_PROP_11_ALITER1"
+          ],
+          [
+            "R_PROP_11",
+            "R_PROP_11_ALITER1"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_4"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_5"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_6"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_6_COROLLARY_1"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_7"
+          ]
+        ],
+        "r_prop_2_cut": true,
+        "r_prop_3_cut": true,
+        "r2_bypass_status": "迂回不可 (単体遮断)",
+        "r3_bypass_status": "迂回不可 (単体遮断)",
+        "model_b_r3_bypass_note": "※設定(c)のみ迂回可"
+      },
+      "model_c1": {
+        "model_name": "モデルC1 (命題6系別証明 追加)",
+        "description": "命題6の系の別証明 (R_PROP_6_COROLLARY_ALITER) を追加",
+        "grounds": [
+          [
+            "AX_4",
+            "AX_7",
+            "DEF_1",
+            "DEF_3",
+            "DEF_6"
+          ]
+        ],
+        "common_premises": [
+          "AX_4",
+          "AX_7",
+          "DEF_1",
+          "DEF_3",
+          "DEF_6"
+        ],
+        "premise_cuts": [
+          [
+            "AX_4"
+          ],
+          [
+            "AX_7"
+          ],
+          [
+            "DEF_1"
+          ],
+          [
+            "DEF_3"
+          ],
+          [
+            "DEF_6"
+          ]
+        ],
+        "rule_cuts": [
+          [
+            "R_PROP_11"
+          ],
+          [
+            "R_PROP_7"
+          ],
+          [
+            "R_PROP_1",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_2",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_3",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_4",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_5",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_6",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_6_COROLLARY_1",
+            "R_PROP_6_COROLLARY_ALITER"
+          ]
+        ],
+        "r_prop_2_cut": false,
+        "r_prop_3_cut": false,
+        "r2_bypass_status": "★迂回可能",
+        "r3_bypass_status": "★迂回可能",
+        "model_b_r3_bypass_note": null
+      },
+      "model_c2": {
+        "model_name": "モデルC2 (全別証明統合)",
+        "description": "命題11別証明と命題6系別証明の両方を統合",
+        "grounds": [
+          [
+            "AX_4",
+            "AX_5",
+            "DEF_3",
+            "DEF_6",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "AX_4",
+            "AX_7",
+            "DEF_1",
+            "DEF_3",
+            "DEF_6"
+          ]
+        ],
+        "common_premises": [
+          "AX_4",
+          "DEF_3",
+          "DEF_6"
+        ],
+        "premise_cuts": [
+          [
+            "AX_4"
+          ],
+          [
+            "DEF_3"
+          ],
+          [
+            "DEF_6"
+          ],
+          [
+            "AX_5",
+            "AX_7"
+          ],
+          [
+            "AX_5",
+            "DEF_1"
+          ],
+          [
+            "AX_7",
+            "SPIN_AX_RATIO"
+          ],
+          [
+            "DEF_1",
+            "SPIN_AX_RATIO"
+          ]
+        ],
+        "rule_cuts": [
+          [
+            "R_PROP_11",
+            "R_PROP_11_ALITER1"
+          ],
+          [
+            "R_PROP_11",
+            "R_PROP_2"
+          ],
+          [
+            "R_PROP_11",
+            "R_PROP_3"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_7"
+          ],
+          [
+            "R_PROP_2",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_2",
+            "R_PROP_7"
+          ],
+          [
+            "R_PROP_3",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_3",
+            "R_PROP_7"
+          ],
+          [
+            "R_PROP_1",
+            "R_PROP_11_ALITER1",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_4",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_5",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_6",
+            "R_PROP_6_COROLLARY_ALITER"
+          ],
+          [
+            "R_PROP_11_ALITER1",
+            "R_PROP_6_COROLLARY_1",
+            "R_PROP_6_COROLLARY_ALITER"
+          ]
+        ],
+        "r_prop_2_cut": false,
+        "r_prop_3_cut": false,
+        "r2_bypass_status": "★迂回可能",
+        "r3_bypass_status": "★迂回可能",
+        "model_b_r3_bypass_note": null
+      }
+    }
+  },
+  "version": "v0.2",
+  "models": {
+    "model_a": {
+      "model_name": "モデルA (基準: 単一証明)",
+      "description": "原典本文の基本証明経路のみ",
+      "grounds": [
+        [
+          "AX_1",
+          "AX_4",
+          "AX_5",
+          "AX_6",
+          "AX_7",
+          "DEF_1",
+          "DEF_3",
+          "DEF_4",
+          "DEF_5",
+          "DEF_6"
+        ]
+      ],
+      "common_premises": [
+        "AX_1",
+        "AX_4",
+        "AX_5",
+        "AX_6",
+        "AX_7",
+        "DEF_1",
+        "DEF_3",
+        "DEF_4",
+        "DEF_5",
+        "DEF_6"
+      ],
+      "premise_cuts": [
+        [
+          "AX_1"
+        ],
+        [
+          "AX_4"
+        ],
+        [
+          "AX_5"
+        ],
+        [
+          "AX_6"
+        ],
+        [
+          "AX_7"
+        ],
+        [
+          "DEF_1"
+        ],
+        [
+          "DEF_3"
+        ],
+        [
+          "DEF_4"
+        ],
+        [
+          "DEF_5"
+        ],
+        [
+          "DEF_6"
+        ]
+      ],
+      "rule_cuts": [
+        [
+          "R_PROP_1"
+        ],
+        [
+          "R_PROP_11"
+        ],
+        [
+          "R_PROP_2"
+        ],
+        [
+          "R_PROP_3"
+        ],
+        [
+          "R_PROP_4"
+        ],
+        [
+          "R_PROP_5"
+        ],
+        [
+          "R_PROP_6"
+        ],
+        [
+          "R_PROP_6_COROLLARY_1"
+        ],
+        [
+          "R_PROP_7"
+        ]
+      ],
+      "r_prop_2_cut": true,
+      "r_prop_3_cut": true,
+      "r2_bypass_status": "迂回不可 (単体遮断)",
+      "r3_bypass_status": "迂回不可 (単体遮断)",
+      "model_b_r3_bypass_note": null
+    },
+    "model_b": {
+      "model_name": "モデルB (命題11別証明 Aliter 1 追加)",
+      "description": "命題11の別証明 (R_PROP_11_ALITER1) を追加",
+      "grounds": [
+        [
+          "AX_4",
+          "AX_5",
+          "DEF_3",
+          "DEF_6",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "AX_1",
+          "AX_4",
+          "AX_5",
+          "AX_6",
+          "AX_7",
+          "DEF_1",
+          "DEF_3",
+          "DEF_4",
+          "DEF_5",
+          "DEF_6"
+        ]
+      ],
+      "common_premises": [
+        "AX_4",
+        "AX_5",
+        "DEF_3",
+        "DEF_6"
+      ],
+      "premise_cuts": [
+        [
+          "AX_4"
+        ],
+        [
+          "AX_5"
+        ],
+        [
+          "DEF_3"
+        ],
+        [
+          "DEF_6"
+        ],
+        [
+          "AX_1",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "AX_6",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "AX_7",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "DEF_1",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "DEF_4",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "DEF_5",
+          "SPIN_AX_RATIO"
+        ]
+      ],
+      "rule_cuts": [
+        [
+          "R_PROP_2"
+        ],
+        [
+          "R_PROP_3"
+        ],
+        [
+          "R_PROP_1",
+          "R_PROP_11_ALITER1"
+        ],
+        [
+          "R_PROP_11",
+          "R_PROP_11_ALITER1"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_4"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_5"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_6"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_6_COROLLARY_1"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_7"
+        ]
+      ],
+      "r_prop_2_cut": true,
+      "r_prop_3_cut": true,
+      "r2_bypass_status": "迂回不可 (単体遮断)",
+      "r3_bypass_status": "迂回不可 (単体遮断)",
+      "model_b_r3_bypass_note": "※設定(c)のみ迂回可"
+    },
+    "model_c1": {
+      "model_name": "モデルC1 (命題6系別証明 追加)",
+      "description": "命題6の系の別証明 (R_PROP_6_COROLLARY_ALITER) を追加",
+      "grounds": [
+        [
+          "AX_4",
+          "AX_7",
+          "DEF_1",
+          "DEF_3",
+          "DEF_6"
+        ]
+      ],
+      "common_premises": [
+        "AX_4",
+        "AX_7",
+        "DEF_1",
+        "DEF_3",
+        "DEF_6"
+      ],
+      "premise_cuts": [
+        [
+          "AX_4"
+        ],
+        [
+          "AX_7"
+        ],
+        [
+          "DEF_1"
+        ],
+        [
+          "DEF_3"
+        ],
+        [
+          "DEF_6"
+        ]
+      ],
+      "rule_cuts": [
+        [
+          "R_PROP_11"
+        ],
+        [
+          "R_PROP_7"
+        ],
+        [
+          "R_PROP_1",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_2",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_3",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_4",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_5",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_6",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_6_COROLLARY_1",
+          "R_PROP_6_COROLLARY_ALITER"
+        ]
+      ],
+      "r_prop_2_cut": false,
+      "r_prop_3_cut": false,
+      "r2_bypass_status": "★迂回可能",
+      "r3_bypass_status": "★迂回可能",
+      "model_b_r3_bypass_note": null
+    },
+    "model_c2": {
+      "model_name": "モデルC2 (全別証明統合)",
+      "description": "命題11別証明と命題6系別証明の両方を統合",
+      "grounds": [
+        [
+          "AX_4",
+          "AX_5",
+          "DEF_3",
+          "DEF_6",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "AX_4",
+          "AX_7",
+          "DEF_1",
+          "DEF_3",
+          "DEF_6"
+        ]
+      ],
+      "common_premises": [
+        "AX_4",
+        "DEF_3",
+        "DEF_6"
+      ],
+      "premise_cuts": [
+        [
+          "AX_4"
+        ],
+        [
+          "DEF_3"
+        ],
+        [
+          "DEF_6"
+        ],
+        [
+          "AX_5",
+          "AX_7"
+        ],
+        [
+          "AX_5",
+          "DEF_1"
+        ],
+        [
+          "AX_7",
+          "SPIN_AX_RATIO"
+        ],
+        [
+          "DEF_1",
+          "SPIN_AX_RATIO"
+        ]
+      ],
+      "rule_cuts": [
+        [
+          "R_PROP_11",
+          "R_PROP_11_ALITER1"
+        ],
+        [
+          "R_PROP_11",
+          "R_PROP_2"
+        ],
+        [
+          "R_PROP_11",
+          "R_PROP_3"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_7"
+        ],
+        [
+          "R_PROP_2",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_2",
+          "R_PROP_7"
+        ],
+        [
+          "R_PROP_3",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_3",
+          "R_PROP_7"
+        ],
+        [
+          "R_PROP_1",
+          "R_PROP_11_ALITER1",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_4",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_5",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_6",
+          "R_PROP_6_COROLLARY_ALITER"
+        ],
+        [
+          "R_PROP_11_ALITER1",
+          "R_PROP_6_COROLLARY_1",
+          "R_PROP_6_COROLLARY_ALITER"
+        ]
+      ],
+      "r_prop_2_cut": false,
+      "r_prop_3_cut": false,
+      "r2_bypass_status": "★迂回可能",
+      "r3_bypass_status": "★迂回可能",
+      "model_b_r3_bypass_note": null
+    }
+  },
+  "findings_classification": {
+    "methodological_properties": [
+      {
+        "title": "真理値遷移の非対称性 (否定支持の非発生)",
+        "detail": "前提や規則が遮断されて支持を失った命題は常にUNKNOWNとなり、否定支持(FALSE)は生じない。スピノザの論証についての結果ではなく、エンジンの意味論の性質。",
+        "models": "全モデル・全設定 (単調性意味論)",
+        "source_ref": "推論エンジンの公理的設計仕様"
+      }
+    ],
+    "robust_findings": [
+      {
+        "title": "命題2・3・公理5の迂回可能性",
+        "detail": "命題6の系の別証明（または全別証明統合）を導入した場合、公理4等により、命題2・命題3・公理5を経由しない証明経路が存在する。※迂回経路の存在は証明を足しても崩れません。",
+        "models": "モデルC1, C2 (全設定)",
+        "source_ref": "Ethica I, Prop. 6, Corollarium, Demonstratio aliter / Prop. 11, Aliter"
+      },
+      {
+        "title": "命題6本文導出の迂回可能性",
+        "detail": "命題6本文の導出に必要な前提は7件(AX_1, 4, 5, 6, DEF_3, 4, 5)であるが、系の別証明が使う前提はDEF_3とAX_4の2件のみ。C1での命題11全体は5前提(DEF_6補完あり)で成立する。",
+        "models": "モデルC1, C2",
+        "source_ref": "Ethica I, Prop. 6, Corollarium, Demonstratio aliter"
+      },
+      {
+        "title": "DEF_3の必須性 (登録済み3ルートの範囲)",
+        "detail": "登録済みの3ルート(第1証明、系の別証明、別証明1)の範囲で、報告された全モデル・全設定で共通前提かつ単体遮断。※命題11の第3証明は未登録のため、全証明で必須とは言えない。単体遮断・共通前提は証明を足すと弱まりうる。",
+        "models": "全モデル (A, B, C1, C2) および全設定 (a〜d)",
+        "source_ref": "Ethica I, Def. 3"
+      },
+      {
+        "title": "第1証明単独時の前提不可欠性",
+        "detail": "単一証明モデルではDEF_6の補完を含む場合は全10前提が単体遮断となり、どの1つが欠けても命題11を導出できない(DEF_6を外した場合は9前提)。",
+        "models": "モデルA",
+        "source_ref": "Ethica I, Prop. 11, Demonstratio (および Prop. 1〜7)"
+      }
+    ],
+    "interpretation_dependent_findings": [
+      {
+        "title": "モデルBにおける迂回可否",
+        "detail": "命題11別証明のみのモデルBでは、命題2は全設定で迂回不可。命題3と公理5は、別証明1で命題3を補完しない設定(c)のみ迂回可能。",
+        "models": "モデルB: 命題2は全設定で不可 / 命題3・公理5は設定(c)のみ可",
+        "source_ref": "Ethica I, Prop. 11, Aliter (命題3引用の補完解釈)"
+      },
+      {
+        "title": "自己原因 (DEF_1) からの独立性",
+        "detail": "命題11別証明1で命題7を含めない解釈では自己原因に非依存な経路が成立するが、命題7を含める解釈では依存が維持される。",
+        "models": "設定(a),(c) で成立 / 設定(b),(d) で不成立",
+        "source_ref": "Ethica I, Prop. 11, Aliter (命題7言及の要否解釈)"
+      },
+      {
+        "title": "神の定義 (DEF_6) の必須性",
+        "detail": "命題11第1証明でDEF_6を補完前提として残す解釈では必須(単体遮断)となるが、外す解釈では共通前提・単体遮断から脱落する。",
+        "models": "DEF_6補完あり版で必須 / 外し版で非必須",
+        "source_ref": "Ethica I, Prop. 11, Demonstratio (証明本文に引用なし)"
+      },
+      {
+        "title": "共通前提の件数変動",
+        "detail": "モデルC2において、別証明1の解釈設定により共通前提数が2件から4件まで変動する。",
+        "models": "モデルC2 (設定c: 2件, 設定a: 3件, 設定b/d: 4件)",
+        "source_ref": "Ethica I, Prop. 11, Aliter (補完前提の範囲)"
+      }
+    ]
+  }
+}

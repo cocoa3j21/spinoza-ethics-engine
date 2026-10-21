@@ -1,0 +1,488 @@
+{
+  "system": "Spinoza_Ethics_Part1_Split_Prop6",
+  "description": "スピノザ『エチカ』第1部形式化データ (v0.2 正式候補版)。命題6本文と系を独立ノードに分離し、PROP_5の修正および原典明示引用に完全準拠。",
+  "nodes": [
+    {
+      "id": "DEF_1",
+      "type": "definition",
+      "title": "自己原因 (Causa sui)",
+      "text_ja": "自己原因とは、その本質が存在を含んでいるもの、あるいはその本性が存在するものとしてしか考えられないものを意味する。",
+      "logical_form": "Causa_sui(x) <=> (Essence(x) -> Exists(x))"
+    },
+    {
+      "id": "DEF_2",
+      "type": "definition",
+      "title": "有限 (In suo genere finita)",
+      "text_ja": "同性の他の物によって制限されうるものは、それ自身の類において有限であると言われる。",
+      "logical_form": "Finite(x) <=> Exists(y, SameNature(x, y) and Limits(y, x))"
+    },
+    {
+      "id": "DEF_3",
+      "type": "definition",
+      "title": "実体 (Substantia)",
+      "text_ja": "実体とは、それ自身のうちにあり、かつそれ自身によって考えられるものを意味する。その概念を形成するのに他のものの概念を必要としない。",
+      "logical_form": "Substance(x) <=> (InItself(x) and ConceivedThroughItself(x))"
+    },
+    {
+      "id": "DEF_4",
+      "type": "definition",
+      "title": "属性 (Attributum)",
+      "text_ja": "属性とは、知性が実体についてその本質を構成していると知覚するものを意味する。",
+      "logical_form": "Attribute(a, x) <=> (Substance(x) and ConstitutesEssence(a, x))"
+    },
+    {
+      "id": "DEF_5",
+      "type": "definition",
+      "title": "様態 (Modus)",
+      "text_ja": "様態とは、実体の変容（変状）、すなわち他のもののうちにあり、かつ他のものを通じて考えられるものを意味する。",
+      "logical_form": "Mode(m, x) <=> (InOther(m, x) and ConceivedThroughOther(m, x))"
+    },
+    {
+      "id": "DEF_6",
+      "type": "definition",
+      "title": "神 (Deus)",
+      "text_ja": "神とは、絶対に無限なる存在、すなわち、それぞれが永遠かつ無限な本質を表現する無限に多くの属性から成る実体を意味する。",
+      "logical_form": "God(x) <=> (Substance(x) and InfiniteAttributes(x))"
+    },
+    {
+      "id": "DEF_7",
+      "type": "definition",
+      "title": "自由と強制 (Libera et Coacta)",
+      "text_ja": "自己の本性の必然性のみによって存在し行動するものを自由と言い、他者によって決定されるものを強制された（必然的）と言う。",
+      "logical_form": "Free(x) <=> (SelfDetermined(x) and not ExternalDetermined(x))"
+    },
+    {
+      "id": "DEF_8",
+      "type": "definition",
+      "title": "永遠性 (Aeternitas)",
+      "text_ja": "永遠性とは、存在そのものが事物の定義から必然的に導き出される限りでの存在を意味する。",
+      "logical_form": "Eternal(x) <=> (Essence(x) -> NecessaryExists(x))"
+    },
+    {
+      "id": "AX_1",
+      "type": "axiom",
+      "title": "存在の所在公理",
+      "text_ja": "存在するすべてのものは、自己の内にあるか、他者の内にあるかのいずれかである。",
+      "logical_form": "forall x: InItself(x) xor InOther(x)"
+    },
+    {
+      "id": "AX_2",
+      "type": "axiom",
+      "title": "認識の依存公理",
+      "text_ja": "他のものによって考えられ得ないものは、それ自身の内において考えられなければならない。",
+      "logical_form": "forall x: (not ConceivedThroughOther(x)) -> ConceivedThroughItself(x)"
+    },
+    {
+      "id": "AX_3",
+      "type": "axiom",
+      "title": "因果必然性公理",
+      "text_ja": "与えられた一定の原因から必然的に結果が生じる。原因がなければ結果は生じ得ない。",
+      "logical_form": "forall c: Cause(c) -> Exists(e, Effect(c, e))"
+    },
+    {
+      "id": "AX_4",
+      "type": "axiom",
+      "title": "因果認識公理",
+      "text_ja": "結果の認識は原因の認識に依存し、原因の認識を含む。",
+      "logical_form": "forall c, e: Effect(c, e) -> (Knows(e) -> Knows(c))"
+    },
+    {
+      "id": "AX_5",
+      "type": "axiom",
+      "title": "無共通者の相互不可知公理",
+      "text_ja": "互いに何の共通点も持たないものは、一方が他方を通じて理解されることはあり得ない。",
+      "logical_form": "forall x, y: NoCommon(x, y) -> not ConceivedThrough(x, y)"
+    },
+    {
+      "id": "AX_6",
+      "type": "axiom",
+      "title": "真の観念公理",
+      "text_ja": "真の観念はその対象（観念の対象物）と合致しなければならない。",
+      "logical_form": "forall i: TrueIdea(i) -> Matches(i, Target(i))"
+    },
+    {
+      "id": "AX_7",
+      "type": "axiom",
+      "title": "非実在思考の公理",
+      "text_ja": "存在しないものとして考えられ得るものの本質は、存在を含まない。",
+      "logical_form": "forall x: CanConceiveNonExistence(x) -> not (Essence(x) -> Exists(x))"
+    },
+    {
+      "id": "PROP_1",
+      "type": "proposition",
+      "title": "実体は様態に先立つ",
+      "text_ja": "実体はその本性上、その変状（様態）に先立つ。",
+      "dependencies": [
+        "DEF_3",
+        "DEF_5"
+      ],
+      "logical_form": "Substance(x) and Mode(m, x) -> Prior(x, m)",
+      "dependencies_detailed": [
+        {
+          "premise_id": "DEF_3",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_2",
+      "type": "proposition",
+      "title": "異属性実体の無共通性",
+      "text_ja": "異なる属性を持つ二つの実体は、互いに何の共通点も持たない。",
+      "dependencies": [
+        "DEF_3"
+      ],
+      "logical_form": "Substance(x) and Substance(y) and DistinctAttributes(x, y) -> NoCommon(x, y)",
+      "dependencies_detailed": [
+        {
+          "premise_id": "DEF_3",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_3",
+      "type": "proposition",
+      "title": "無共通実体間の因果否定",
+      "text_ja": "互いに何の共通点も持たない物は、一方が他方の原因となることはできない。",
+      "dependencies": [
+        "AX_4",
+        "AX_5"
+      ],
+      "logical_form": "NoCommon(x, y) -> not (Cause(x, y) or Cause(y, x))",
+      "dependencies_detailed": [
+        {
+          "premise_id": "AX_4",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "AX_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_4",
+      "type": "proposition",
+      "title": "実体の区別原理",
+      "text_ja": "二つ以上の別々の物は、実体の属性の差異によるか、様態の差異によって区別される。",
+      "dependencies": [
+        "DEF_3",
+        "DEF_4",
+        "DEF_5",
+        "AX_1"
+      ],
+      "logical_form": "Distinct(x, y) -> (DistinctAttributes(x, y) or DistinctModes(x, y))",
+      "dependencies_detailed": [
+        {
+          "premise_id": "DEF_3",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_4",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "AX_1",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_5",
+      "type": "proposition",
+      "title": "同属性実体単一の原理",
+      "text_ja": "自然界には、同一の本性あるいは同一の属性を持つ二つ以上の実体は存在し得ない。",
+      "dependencies": [
+        "PROP_4",
+        "PROP_1",
+        "DEF_3",
+        "AX_6"
+      ],
+      "logical_form": "Substance(x) and Substance(y) and ShareAttribute(x, y) -> (x == y)",
+      "audit_note": "原典証明(Gebhardt S. 48)に準拠し、AX_6を追加、誤混入のDEF_6を除外。",
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_4",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "PROP_1",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_3",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "AX_6",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_6",
+      "type": "proposition",
+      "title": "命題6: 一の実体は他の実体から産出されることはできない",
+      "text_ja": "一つの実体は他の実体から産出されることはあり得ない。",
+      "dependencies": [
+        "PROP_5",
+        "PROP_2",
+        "PROP_3"
+      ],
+      "logical_form": "Substance(x) and Substance(y) and (x != y) -> not Causes(x, y)",
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "PROP_2",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "PROP_3",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ],
+      "text_la": "Una substantia non potest produci ab alia substantia."
+    },
+    {
+      "id": "PROP_6_COROLLARY",
+      "type": "corollary",
+      "title": "命題6系: 実体は他者から産出されることはできない",
+      "text_ja": "ここから、実体は他者から産出されることはできない、ということが帰結する。",
+      "text_la": "Hinc sequitur substantiam non posse produci ab alio.",
+      "logical_form": "forall x: Substantia(x) -> not exists y: (x != y and Produces(y, x))",
+      "proof_variants": {
+        "demonstratio_1": {
+          "description": "第1証明 (Demonstratio): 命題6本文、公理1、定義3、定義5から導出",
+          "dependencies": [
+            "PROP_6",
+            "AX_1",
+            "DEF_3",
+            "DEF_5"
+          ],
+          "latin_citation": "ut patet ex axiom. 1, et definit. 3 et 5. Atqui ab alio substantia produci non potest (per propos. praecedentem)"
+        },
+        "demonstratio_aliter": {
+          "description": "別証明 (Demonstratio aliter): 定義3と公理4のみから直接導出 (命題6本文は不使用)",
+          "dependencies": [
+            "DEF_3",
+            "AX_4"
+          ],
+          "latin_citation": "per Axiom. 4; adeoque (per Definit. 3) non esset substantia."
+        }
+      },
+      "dependencies": [
+        "PROP_6",
+        "AX_1",
+        "DEF_3",
+        "DEF_5"
+      ],
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_6",
+          "explicit_in_text": true,
+          "supplement_reason": "原典本文: per propos. praecedentem"
+        },
+        {
+          "premise_id": "AX_1",
+          "explicit_in_text": true,
+          "supplement_reason": "原典本文: ex axiom. 1"
+        },
+        {
+          "premise_id": "DEF_3",
+          "explicit_in_text": true,
+          "supplement_reason": "原典本文: et definit. 3"
+        },
+        {
+          "premise_id": "DEF_5",
+          "explicit_in_text": true,
+          "supplement_reason": "原典本文: et 5"
+        }
+      ]
+    },
+    {
+      "id": "PROP_7",
+      "type": "proposition",
+      "title": "実体の必然的存在性",
+      "text_ja": "実体の本性には存在することが属する（実体は自己原因であり必然的に存在する）。",
+      "dependencies": [
+        "PROP_6_COROLLARY",
+        "DEF_1"
+      ],
+      "logical_form": "Substance(x) -> (Causa_sui(x) and Exists(x))",
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_6_COROLLARY",
+          "explicit_in_text": true,
+          "supplement_reason": "原典本文: per praecedentis propositionis corollarium"
+        },
+        {
+          "premise_id": "DEF_1",
+          "explicit_in_text": true,
+          "supplement_reason": "原典本文: per definitionem 1"
+        }
+      ]
+    },
+    {
+      "id": "PROP_8",
+      "type": "proposition",
+      "title": "実体の無限性",
+      "text_ja": "すべての実体は必然的に無限である。",
+      "dependencies": [
+        "PROP_5",
+        "PROP_7",
+        "DEF_2"
+      ],
+      "logical_form": "Substance(x) -> Infinite(x)",
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "PROP_7",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_2",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_11",
+      "type": "proposition",
+      "title": "神の必然的実在",
+      "text_ja": "神、すなわち無限の属性から成る実体は、必然的に実在する。",
+      "dependencies": [
+        "DEF_6",
+        "PROP_7",
+        "AX_7"
+      ],
+      "logical_form": "God(x) -> NecessaryExists(x)",
+      "audit_note": "本文明示引用は PROP_7, AX_7 のみ。DEF_6 は神が実体であることを保証する概念的補完前提。",
+      "dependencies_detailed": [
+        {
+          "premise_id": "DEF_6",
+          "explicit_in_text": false,
+          "supplement_reason": "言明(題名)にある神(Deus)が実体(Substantia)であることを保証し、実体に関する命題7を神に適用するための概念的補完前提。"
+        },
+        {
+          "premise_id": "PROP_7",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "AX_7",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_14",
+      "type": "proposition",
+      "title": "実体の神唯一性",
+      "text_ja": "神のほかにいかなる実体も存在し得ず、また考えられ得ない（汎神論の一元論）。",
+      "dependencies": [
+        "PROP_11",
+        "PROP_5",
+        "DEF_6"
+      ],
+      "logical_form": "Substance(x) -> (x == God)",
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_11",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "PROP_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_6",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    },
+    {
+      "id": "PROP_15",
+      "type": "proposition",
+      "title": "万物の神内在性",
+      "text_ja": "存在するすべてのものは神のうちにあり、神なしには何ものも存在し得ず、理解され得ない。",
+      "dependencies": [
+        "PROP_14",
+        "DEF_3",
+        "DEF_5",
+        "AX_1"
+      ],
+      "logical_form": "forall x: In(x, God) and ConceivedThrough(x, God)",
+      "dependencies_detailed": [
+        {
+          "premise_id": "PROP_14",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_3",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "DEF_5",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        },
+        {
+          "premise_id": "AX_1",
+          "explicit_in_text": true,
+          "supplement_reason": null
+        }
+      ]
+    }
+  ],
+  "version": "v0.2-candidate",
+  "status": "formal_candidate",
+  "metadata": {
+    "formalization_version": "v0.2",
+    "status": "formal_dataset_candidate",
+    "revisions": {
+      "PROP_5_correction": "原典ラテン語証明本文（per propositionem 4, 1, definitionem 3, axioma 6）に従い、欠落していたAX_6を追加し、原典に引用のないDEF_6を除外。",
+      "PROP_6_corollary_separation": "命題6本文（PROP_6）と系（PROP_6_COROLLARY）を独立ノードに分離。系の第1証明（PROP_6, AX_1, DEF_3, DEF_5）、系の別証明（DEF_3, AX_4、命題6本文不使用）、命題7（系とDEF_1）の配線を原典本文に完全準拠。"
+    },
+    "relation_to_pilot_data": "パイロットデータ（spinoza_pilot_v2.json等）は命題11周辺を12〜13項目に縮約した検証用データであり、本ファイルは26命題体系全体を原典通りに構造化した正式データ候補である。"
+  }
+}
