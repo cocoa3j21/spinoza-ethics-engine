@@ -129,3 +129,29 @@
 * デカルトの第三省察（神の観念の原因論証）と第六省察（物質的物体の実在証明）を峻別。
 * スピノザ命題1〜6の残存を「普遍的耐性」と説明せず、カント批判のモデル化範囲（命題7無効化）の局所的帰結として厳密に記述。
 * ライプニッツにおいて批判対象としなかった命題（単子の単純性、窓なきモナド、充足理由律、現象性）の選定理由と、カント『反省概念の多義性』等における実質的批判の未モデル化に関する留保を明記。
+
+---
+
+## 5. 使用底本・出典およびラテン語テキスト校訂記録 (Philological Sources & Collation)
+
+### (1) 参照底本・出典 (Editions & Digital Facsimiles)
+1. **1677年初版 (Opera Posthuma)**:
+   - 書誌: *B. d. S. Opera Posthuma, quorum series post Praefationem exhibetur.* [Amsterdam: Jan Rieuwertsz], 1677.
+   - 参照デジタルファクシミリ: Herzog August Bibliothek Wolfenbüttel 所蔵本デジタルアーカイブ、および Google Books 収載の初版スキャン。
+2. **Gebhardt 学術標準版 (Gebhardt Edition)**:
+   - 書誌: *Spinoza Opera*, Im Auftrag der Heidelberger Akademie der Wissenschaften hrsg. von Carl Gebhardt. Heidelberg: Carl Winters Universitätsbuchhandlung, 1925, 4 Bände (Ethica は Band II 所収).
+3. **ラテン語電子テキスト対照底本**:
+   - The Latin Library および Wikisource (Spinoza, *Ethica in linguam latinam*)。Gebhardt版および初版スキャンとの照合底本として利用。
+
+### (2) AI記憶生成に伴う初期ラテン語誤記の校訂記録
+AIが記憶からラテン語テキストを出力した初期データにおいて、以下の誤記・語順転倒が確認され、原本と対照して訂正された：
+* **定義3 (`DEF_3`) の語写**:
+  - AI初期出力: `cujus conceptus non eget conceptu alterius rei`（*non eget*）
+  - 原本確定テキスト: `cujus conceptus non indiget conceptu alterius rei`（*non indiget* / Gebhardt II, S. 45; OP 1677, p. 1）
+  - 修正: スピノザの実際の語彙用法である *non indiget* に訂正。
+* **命題2 (`PROP_2`) の語順転倒**:
+  - AI初期出力: `Duae substantiae diversas habentes attributa, nihil inter se commune habent.`
+  - 原本確定テキスト: `Duae substantiae, diversa attributa habentes, nihil inter se commune habent.`（Gebhardt II, S. 48; OP 1677, p. 3）
+  - 修正: 格変化（*diversa* 中性複数対格）および原本の語順に訂正。
+* **命題5 (`PROP_5`) の前提配線訂正**:
+  - 原典本文（Gebhardt II, S. 48）の「*Demonstr. Si darentur plures distinctae, deberent inter se distingui, vel ex diversitate attributorum (per Prop. 4), vel ex diversitate affectionum (per Prop. 1). Si tantum ex diversitate attributorum, dabitur ergo tantum una ejusdem attributi (per Ax. 6)...*」に対照し、初期データに混入していた `DEF_6` を除外し、本文が明示引用する `PROP_4, PROP_1, DEF_3, AX_6` に完全準拠させて再配線。
