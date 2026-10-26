@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神の存在をめぐる論証 比較レポート (v0) | 幾何学的哲学推論エンジン</title>
+  <style>
+    :root {
+      --bg-color: #0f141c;
+      --card-bg: #161e2e;
+      --card-border: #233044;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-rgb: 56, 189, 248;
+      --badge-verified-bg: rgba(16, 185, 129, 0.15);
+      --badge-verified-text: #34d399;
+      --badge-ai-bg: rgba(56, 189, 248, 0.15);
+      --badge-ai-text: #38bdf8;
+      --badge-unverified-bg: rgba(245, 158, 11, 0.15);
+      --badge-unverified-text: #fbbf24;
+      --table-header-bg: #1e293b;
+      --table-row-hover: #1e293b;
+      --table-border: #334155;
+      --tag-bg: #1e293b;
+      --psr-yes: #f43f5e;
+      --psr-no: #64748b;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-rgb: 2, 132, 199;
+      --badge-verified-bg: #d1fae5;
+      --badge-verified-text: #065f46;
+      --badge-ai-bg: #e0f2fe;
+      --badge-ai-text: #0369a1;
+      --badge-unverified-bg: #fef3c7;
+      --badge-unverified-text: #92400e;
+      --table-header-bg: #f1f5f9;
+      --table-row-hover: #f8fafc;
+      --table-border: #cbd5e1;
+      --tag-bg: #f1f5f9;
+      --psr-yes: #be123c;
+      --psr-no: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ヘッダー */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 16px;
+    }
+
+    .header-title h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-title p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+    }
+
+    /* 免責事項・警告カード */
+    .disclaimer-card {
+      background: rgba(var(--accent-rgb), 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .disclaimer-card strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .disclaimer-card p {
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    .warning-card {
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 4px solid #f59e0b;
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+
+    .warning-card strong {
+      color: #f59e0b;
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .warning-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* セクション */
+    section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+    }
+
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* テーブル */
+    .table-responsive {
+      overflow-x: auto;
+      margin-bottom: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--table-border);
+    }
+
+    th {
+      background-color: var(--table-header-bg);
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    tr:hover {
+      background-color: var(--table-row-hover);
+    }
+
+    /* バッジ */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-verified {
+      background-color: var(--badge-verified-bg);
+      color: var(--badge-verified-text);
+      border: 1px solid var(--badge-verified-text);
+    }
+
+    .badge-ai {
+      background-color: var(--badge-ai-bg);
+      color: var(--badge-ai-text);
+      border: 1px solid var(--badge-ai-text);
+    }
+
+    .badge-unverified {
+      background-color: var(--badge-unverified-bg);
+      color: var(--badge-unverified-text);
+      border: 1px solid var(--badge-unverified-text);
+    }
+
+    .badge-interpretive {
+      background-color: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid #c084fc;
+    }
+
+    /* ノードタグ */
+    .node-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      background: var(--tag-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--card-border);
+      display: inline-block;
+      margin: 1px 2px;
+    }
+
+    .psr-partial {
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
+    .psr-yes {
+      color: var(--psr-yes);
+      font-weight: 700;
+    }
+
+    .psr-no {
+      color: var(--psr-no);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--card-border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ヘッダー -->
+    <header>
+      <div class="header-title">
+        <h1>幾何学的哲学推論エンジン 比較レポート (v0)</h1>
+        <p>神の存在をめぐる幾何学的・論理的推論構造の横断的分析（デカルト・アンセルムス・スピノザ）</p>
+      </div>
+      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+        <span id="themeIcon">☀️</span> <span id="themeText">Light Mode</span>
+      </button>
+    </header>
+
+    <!-- 冒頭の免責事項 -->
+    <div class="disclaimer-card">
+      <strong>【重要：免責事項および学術的対象の限定】</strong>
+      <p>
+        本ページは、<strong>どの宗教・宗派の神であるかを決めるものではなく、また神の存在を論証的に証明あるいは否定するものでもありません。</strong><br>
+        哲学史上の古典的文献に記された幾何学的・論理的論証（公理・定義・前提・推論規則の依存関係）を推論エンジンに入力し、その形式的グラフ構造、単体遮断への耐震性、および前提の分岐・合流関係を純粋に中立的・機械的に比較分析する学術技術レポートです。
+      </p>
+    </div>
+
+    <!-- 表の上：前提数とノード粒度に関する注意 -->
+    <div class="warning-card">
+      <strong>⚠️【ノード粒度と前提の数に関する重要な注意】</strong>
+      <p>
+        各哲学体系におけるノード（定義・公理・命題）の分解粒度は、原典の記述密度や後世の定式化スタイル（原典本文の忠実な抽出か、現代分析哲学流の再構成か）によって大きく異なります。<br>
+        したがって、<strong>前提の数（根拠サイズ）の多寡を、論証の強弱や完成度の順位として解釈することはできません。</strong> 本分析の目的は、単体遮断への脆弱性や共通前提の所在を中立的に把握することに限定されます。
+      </p>
+    </div>
+
+    <!-- 第1部：基本対照表 -->
+    <section>
+      <h2>1. 論証構造の基本対照表</h2>
+      <p class="section-desc">
+        デカルト『第二答弁』末尾の幾何学的叙述、アンセルムス『プロスロギオン』2–3章、およびスピノザ『エチカ』第1部命題11の推論構造を同一形式で集計したものです。<br>
+        ※ 一次文献との原典対照が未完了である体系（<code>MAL_PLA</code>, <code>CLK_DEM</code>）は除外しています。
+      </p>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>体系</th>
+              <th>対象結論 (目標命題)</th>
+              <th>状態</th>
+              <th>最小根拠の組数</th>
+              <th>最小根拠の大きさ</th>
+              <th>単体遮断の前提 (Single Premise Cuts)</th>
+              <th>共通前提</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>デカルト</strong></td>
+              <td>
+                <strong>命題1</strong> (<code>DES_PROP_1</code>)<br>
+                <small>神の存在の本質的認知（存在論的論証）</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">2件</td>
+              <td>
+                <span class="node-code">DES_AX_10</span>
+                <span class="node-code">DES_DEF_9</span>
+                <small>(計2件: どちらを止めても不成立)</small>
+              </td>
+              <td><span class="node-code">DES_AX_10</span> <span class="node-code">DES_DEF_9</span></td>
+            </tr>
+            <tr>
+              <td><strong>デカルト</strong></td>
+              <td>
+                <strong>命題2</strong> (<code>DES_PROP_2</code>)<br>
+                <small>神の観念からの後天的存在証明</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">5件</td>
+              <td>
+                <span class="node-code">DES_AX_3</span>
+                <span class="node-code">DES_AX_5</span>
+                <span class="node-code">DES_AX_6</span>
+                <span class="node-code">DES_DEF_2</span>
+                <span class="node-code">DES_DEF_8</span>
+                <small>(計5件)</small>
+              </td>
+              <td>全5件 (単一ルート)</td>
+            </tr>
+            <tr>
+              <td><strong>デカルト</strong></td>
+              <td>
+                <strong>命題3</strong> (<code>DES_PROP_3</code>)<br>
+                <small>自己の存在からの神の存在証明</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">8件</td>
+              <td>
+                <span class="node-code">DES_AX_1</span>
+                <span class="node-code">DES_AX_2</span>
+                <span class="node-code">DES_AX_4</span>
+                <span class="node-code">DES_AX_7</span>
+                <span class="node-code">DES_AX_8</span>
+                <span class="node-code">DES_AX_9</span>
+                <span class="node-code">DES_DEF_2</span>
+                <span class="node-code">DES_DEF_8</span>
+                <small>(計8件)</small>
+              </td>
+              <td>全8件 (単一ルート)</td>
+            </tr>
+            <tr>
+              <td><strong>アンセルムス</strong></td>
+              <td>
+                <strong>論証1</strong> (<code>ANS1_C</code>)<br>
+                <small>神の現実的存在 (プロスロギオン第2章)</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">3件</td>
+              <td>
+                <span class="node-code">ANS1_P1</span>
+                <span class="node-code">ANS1_P2</span>
+                <span class="node-code">ANS1_P3</span>
+                <small>(計3件)</small>
+              </td>
+              <td><span class="node-code">ANS1_P1</span> <span class="node-code">ANS1_P2</span> <span class="node-code">ANS1_P3</span></td>
+            </tr>
+            <tr>
+              <td><strong>アンセルムス</strong></td>
+              <td>
+                <strong>論証2</strong> (<code>ANS2_C</code>)<br>
+                <small>神の必然的存在 (プロスロギオン第3章)</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">3件</td>
+              <td>
+                <span class="node-code">ANS2_P1</span>
+                <span class="node-code">ANS2_P2</span>
+                <span class="node-code">ANS2_P6</span>
+                <small>(計3件)</small>
+              </td>
+              <td><span class="node-code">ANS2_P1</span> <span class="node-code">ANS2_P2</span> <span class="node-code">ANS2_P6</span></td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>
+                <strong>命題11</strong> (<code>PROP_11</code>)<br>
+                <small>モデルA (基準: 第1証明のみ)</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">10件</td>
+              <td>
+                <span class="node-code">AX_1</span> <span class="node-code">AX_4</span> <span class="node-code">AX_5</span> <span class="node-code">AX_6</span> <span class="node-code">AX_7</span>
+                <span class="node-code">DEF_1</span> <span class="node-code">DEF_3</span> <span class="node-code">DEF_4</span> <span class="node-code">DEF_5</span> <span class="node-code">DEF_6</span>
+                <small>(計10件)</small>
+              </td>
+              <td>全10件 (単一ルート)</td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>
+                <strong>命題11</strong> (<code>PROP_11</code>)<br>
+                <small>モデルB (別証明1追加 / 設定a)</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">2組</td>
+              <td style="text-align: center;">5件</td>
+              <td>
+                <span class="node-code">AX_4</span> <span class="node-code">AX_5</span> <span class="node-code">DEF_3</span> <span class="node-code">DEF_6</span>
+                <small>(計4件: 10件から大幅減少)</small>
+              </td>
+              <td><span class="node-code">AX_4</span> <span class="node-code">AX_5</span> <span class="node-code">DEF_3</span> <span class="node-code">DEF_6</span></td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>
+                <strong>命題11</strong> (<code>PROP_11</code>)<br>
+                <small>モデルC1 (命題6系の別証明追加)</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">1組</td>
+              <td style="text-align: center;">5件</td>
+              <td>
+                <span class="node-code">AX_4</span> <span class="node-code">AX_7</span> <span class="node-code">DEF_1</span> <span class="node-code">DEF_3</span> <span class="node-code">DEF_6</span>
+                <small>(計5件: 命題2・3・公理5を迂回)</small>
+              </td>
+              <td>全5件 (短縮ルート)</td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>
+                <strong>命題11</strong> (<code>PROP_11</code>)<br>
+                <small>モデルC2 (全別証明統合 / 設定a)</small>
+              </td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td style="text-align: center;">2組</td>
+              <td style="text-align: center;">5件</td>
+              <td>
+                <span class="node-code">AX_4</span> <span class="node-code">DEF_3</span> <span class="node-code">DEF_6</span>
+                <small>(計3件: 最強の迂回耐性)</small>
+              </td>
+              <td><span class="node-code">AX_4</span> <span class="node-code">DEF_3</span> <span class="node-code">DEF_6</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 0.84rem; color: var(--text-muted); margin-top: 10px; line-height: 1.5; border-left: 3px solid var(--accent); padding-left: 12px;">
+          <p>※ <strong>アンセルムスの前提内訳について</strong>: 論証1の <code>ANS1_P5</code> および論証2の <code>ANS2_P4</code>（「神より大きいものは想像できない」）は、神の定義 <code>P1</code> に依存して導かれる命題（導出）として整理されているため、基礎前提（無前提ノード）は各論証とも3件ずつとなります。</p>
+        </div>
+
+        <!-- スピノザ命題11の証明呼称対応表 -->
+        <div style="margin-top: 18px;">
+          <h3 style="font-size: 0.95rem; margin-bottom: 8px; color: var(--text-main);">補足：スピノザ『エチカ』第1部 命題11における証明の呼称対応表</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>本プロジェクトでの呼称</th>
+                <th>原典ラテン語表記</th>
+                <th>主な論拠・特徴</th>
+                <th>モデル化の状態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>第1証明</strong></td>
+                <td><em>Demonstratio</em></td>
+                <td>自己原因（<code>DEF_1</code>）および命題7（実体の本性には存在が属する）を経由する本証明</td>
+                <td><span class="badge badge-verified">登録済み (全モデル)</span></td>
+              </tr>
+              <tr>
+                <td><strong>別証明1</strong></td>
+                <td><em>Aliter</em> [1]</td>
+                <td>充足理由律（<code>SPIN_AX_RATIO</code>: 存在・非存在の理由原理）に基づく背理法論証</td>
+                <td><span class="badge badge-verified">登録済み (モデルB, C2)</span></td>
+              </tr>
+              <tr>
+                <td><strong>第3証明</strong></td>
+                <td><em>Aliter</em> [2]</td>
+                <td>力・能力による論証（<em>Posse non existere impotentia est...</em> / 存在しうることは力である）</td>
+                <td><span class="badge badge-unverified">未登録 (今後の拡張候補)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+          ※ 証明の数え方は、研究者によって異なります(4つと数える研究もあります)。<br>
+          ※ このモデルは、本文の明示引用と、モデル作成者が採用した補完前提を区別して登録しています。原典に含まれる暗黙の依存を、すべて網羅したものではありません。各証明が充足理由律に暗黙に依存すると読む研究がある。その読み方では、充足理由律のみを遮断した結果は変わりうる。
+        </p>
+      </div>
+    </section>
+
+    <!-- 第2部：テーマ分析 充足理由律 -->
+    <section>
+      <h2>2. テーマ分析：充足理由律（解釈 X1）の含有状況</h2>
+      <p class="section-desc">
+        各結論の根拠に、因果律・充足理由律（「何ものも無からは生じない」「存在する理由・存在しない理由がなければならない」）に該当する前提が含まれているかの対照表です。<br>
+        ※ 充足理由律との同一視および対応づけは <span class="badge badge-interpretive">解釈 (人の判断)</span> によるものです。
+      </p>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>体系</th>
+              <th>対象結論</th>
+              <th>状態</th>
+              <th>充足理由律の含有区分</th>
+              <th>該当ノード</th>
+              <th>解釈・文脈の注記</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>デカルト</strong></td>
+              <td>命題1 (<code>DES_PROP_1</code>)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-no">含まない</span></td>
+              <td>—</td>
+              <td>純粋な概念分析（最高完全者の本性に存在が含まれる）であり、生成・因果の理由律は経由しない。</td>
+            </tr>
+            <tr>
+              <td><strong>デカルト</strong></td>
+              <td>命題2 (<code>DES_PROP_2</code>)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-no">含まない</span></td>
+              <td>—</td>
+              <td>観念の表象的原因（<code>DES_AX_5</code>）に基づくが、因果律の一般公理（<code>DES_AX_1</code>）は直接の前提集合に含まれない。</td>
+            </tr>
+            <tr>
+              <td><strong>デカルト</strong></td>
+              <td>命題3 (<code>DES_PROP_3</code>)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-yes">すべての根拠に含む</span></td>
+              <td><span class="node-code">DES_AX_1</span></td>
+              <td>「何ものも無からは生じない（*Ex nihilo nihil fit*）」。自己を無から維持できない有限主体の保存原因として必須。</td>
+            </tr>
+            <tr>
+              <td><strong>アンセルムス</strong></td>
+              <td>論証1 (<code>ANS1_C</code>)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-no">含まない</span></td>
+              <td>—</td>
+              <td>「思考可能な最大者」の定義（<code>ANS1_P1</code>）と実在の優位性（<code>ANS1_P3</code>）からなる帰謬法であり、理由律公理は不使用。</td>
+            </tr>
+            <tr>
+              <td><strong>アンセルムス</strong></td>
+              <td>論証2 (<code>ANS2_C</code>)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-no">含まない</span></td>
+              <td>—</td>
+              <td>必然的存在の優位性（<code>ANS2_P2</code>）に基づく様相論証であり、因果・存在理由律には依存しない。</td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>命題11 (モデルA)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-no">含まない</span></td>
+              <td>—</td>
+              <td>第1証明は実体の一円性（命題5）や自己原因（定義1）に基づき、充足理由律公理は独立前提として含まれない。</td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>命題11 (モデルB)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-partial">一部の根拠に含む</span></td>
+              <td><span class="node-code">SPIN_AX_RATIO*</span></td>
+              <td>別証明1（Aliter 1）の根拠ルートに含まれるが、第1証明ルートには含まれない。</td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>命題11 (モデルC1)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-no">含まない</span></td>
+              <td>—</td>
+              <td>命題6の系の別証明を経由するルートであり、別証明1（理由律）は含まない。</td>
+            </tr>
+            <tr>
+              <td><strong>スピノザ</strong></td>
+              <td>命題11 (モデルC2)</td>
+              <td><span class="badge badge-ai">AI照合済み (人の確認前)</span></td>
+              <td><span class="psr-partial">一部の根拠に含む</span></td>
+              <td><span class="node-code">SPIN_AX_RATIO*</span></td>
+              <td>全別証明統合モデルにおいて、第1証明短縮ルートには含まれず、別証明1ルートにのみ含まれる。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="font-size: 0.84rem; color: var(--text-muted); margin-top: 12px; line-height: 1.5; border-left: 3px solid var(--accent); padding-left: 12px;">
+        <p><code>*</code> <strong>【脚注：SPIN_AX_RATIO について】</strong>: <code>SPIN_AX_RATIO</code>（充足理由律: 「各々の事物について、それが存在する理由・原因とともに、存在しない理由・原因がなければならない」）は、スピノザが命題11別証明1の本文中で述べている理由原理を形式化するために、作者が補完した前提。番号付きの公理ではない。原典『エチカ』第1部の冒頭公理（Axioma 1〜7）には含まれていません。</p>
+      </div>
+    </section>
+
+    <!-- 第3部：体系間比較候補（解釈 X1〜X4） -->
+    <section>
+      <h2>3. 体系間比較候補（解釈 X1〜X4）の対応一覧</h2>
+      <p class="section-desc">
+        異なる哲学体系間においてマッピングされた4つの比較候補です。いずれも数学的同一性ではなく <span class="badge badge-interpretive">解釈 (人の判断)</span> に基づきます。
+      </p>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>識別子</th>
+              <th>主題</th>
+              <th>性質</th>
+              <th>構成メンバー</th>
+              <th>対応づけの根拠と留保事項</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>X1</strong></td>
+              <td><strong>充足理由律</strong></td>
+              <td>共通前提の候補 <span class="badge badge-interpretive">解釈</span></td>
+              <td>
+                <span class="node-code">DES_AX_1</span>
+                <span class="node-code">CLK_PSR</span>
+                <span class="node-code">SPIN_AX_RATIO*</span>
+              </td>
+              <td>
+                近世合理論における「事物の存在・生成には十全な根拠が必要である」とする公理系列。<br>
+                <strong>留保</strong>: スピノザの <code>SPIN_AX_RATIO</code> は作者補完前提。デカルトの無からの無とスピノザの存在・非存在の理由では射程に差がある。
+              </td>
+            </tr>
+            <tr>
+              <td><strong>X2</strong></td>
+              <td><strong>実体と心身</strong></td>
+              <td>対立点の候補 <span class="badge badge-interpretive">解釈</span></td>
+              <td>
+                <span class="node-code">DES_DEF_5</span>
+                <span class="node-code">DES_DEF_6</span>
+                <span class="node-code">DES_DEF_7</span>
+                <span class="node-code">DES_PROP_4</span>
+                <span class="node-code">PROP_14</span>
+              </td>
+              <td>
+                デカルトの心身二元論（精神と物体は実在的に区別された二実体）とスピノザの一元論（唯一無限実体）の対立。<br>
+                <strong>留保</strong>: デカルトは神以外の有限実体を認めるが、スピノザは自己原因でない有限物を実体と認めないため、概念の定義域が異なる。
+              </td>
+            </tr>
+            <tr>
+              <td><strong>X3</strong></td>
+              <td><strong>必然的存在</strong></td>
+              <td>類似構造の候補 <span class="badge badge-interpretive">解釈</span></td>
+              <td>
+                <span class="node-code">DES_AX_10</span>
+                <span class="node-code">DES_PROP_1</span>
+                <span class="node-code">ANS2_P2</span>
+                <span class="node-code">PROP_11</span>
+              </td>
+              <td>
+                「最高完全者・最大者の本性・概念から必然的存在を導出する」存在論的論証の骨格。<br>
+                <strong>留保</strong>: アンセルムスは信仰の了解、デカルトは観念の客観的実在性、スピノザは自己原因から出発しており神観の基礎が異なる。
+              </td>
+            </tr>
+            <tr>
+              <td><strong>X4</strong></td>
+              <td><strong>カント批判が向けられる前提</strong></td>
+              <td>批判適用の候補 <span class="badge badge-interpretive">解釈</span></td>
+              <td>
+                <span class="node-code">ANS1_P3</span>
+                <span class="node-code">DES_AX_10</span>
+              </td>
+              <td>
+                カント『純粋理性批判』の「存在は実在的述語ではない」批判が向けられる前提ノード。<br>
+                <strong>留保</strong>: カントの批判をどの公理に遮断・衝突としてマッピングするかはモデル設計者の解釈に依存する。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+      <p>幾何学的哲学推論エンジン (Philosophy Geometric Engine) — 学術研究用比較レポート v0</p>
+      <p><small>推論意味論コア: v0.1 diagnostic_monotone | 原典対照版: AT VII 160–170 / Proslogion II–III / Gebhardt II</small></p>
+    </footer>
+  </div>
+
+  <script>
+    // テーマ切り替え機能
+    function initTheme() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        updateThemeUI(savedTheme);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        document.documentElement.setAttribute("data-theme", "light");
+        updateThemeUI("light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        updateThemeUI("dark");
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+      updateThemeUI(next);
+    }
+
+    function updateThemeUI(theme) {
+      const icon = document.getElementById("themeIcon");
+      const text = document.getElementById("themeText");
+      if (theme === "light") {
+        icon.textContent = "🌙";
+        text.textContent = "Dark Mode";
+      } else {
+        icon.textContent = "☀️";
+        text.textContent = "Light Mode";
+      }
+    }
+
+    // OS設定変更の検知
+    if (window.matchMedia) {
+      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+        if (!localStorage.getItem("theme")) {
+          const next = e.matches ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", next);
+          updateThemeUI(next);
+        }
+      });
+    }
+
+    initTheme();
+  </script>
+</body>
+</html>

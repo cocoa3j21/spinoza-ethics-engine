@@ -1,0 +1,147 @@
+{
+  "system": "Anselm_Proslogion_IEP",
+  "title": "アンセルムス『プロスロギオン』2-3章の存在論的論証(IEPの標準形による再構成)",
+  "description": "アンセルムス『プロスロギオン』2-3章の存在論的論証(IEP標準形による再構成)。The Latin Library / Migne PL 158 原典照合・差異注記付き。",
+  "version": "1.0",
+  "status": "verified_reconstruction_with_proslogion_diff",
+  "primary_source": "Anselmi Proslogion, Capp. II & III (PL 158, col. 227-228)",
+  "secondary_source": "IEP 'Anselm: Ontological Argument' (Standard reconstruction)",
+  "nodes": [
+    {
+      "id": "ANS1_P1",
+      "type": "premise",
+      "title": "神の概念的定義 (それより大なるものが考えられない存在)",
+      "text_ja": "神は、それより大きいものが想像できない存在として、定義により理解される(概念的真理)。",
+      "dependencies": [],
+      "source_ref": "Proslogion Cap. II / IEP Arg 1 Premise 1",
+      "note": "原典: aliquid quo nihil maius cogitari possit"
+    },
+    {
+      "id": "ANS1_P2",
+      "type": "premise",
+      "title": "神の観念の心内存在",
+      "text_ja": "神は観念として心の中にある。",
+      "dependencies": [],
+      "source_ref": "Proslogion Cap. II / IEP Arg 1 Premise 2",
+      "note": "原典: in intellectu esse"
+    },
+    {
+      "id": "ANS1_P3",
+      "type": "premise",
+      "title": "実在の優位性 (存在は完全性)",
+      "text_ja": "観念として心の中にあり、かつ現実にもある存在は、他が同じなら、心の中だけにある存在より大きい(存在は完全性)。",
+      "dependencies": [],
+      "source_ref": "Proslogion Cap. II / IEP Arg 1 Premise 3",
+      "note": "原典: potest cogitari esse et in re: quod maius est。カント批判が向けられる前提の候補(解釈)"
+    },
+    {
+      "id": "ANS1_P4",
+      "type": "derived",
+      "title": "帰謬法の条件節",
+      "text_ja": "もし神が心の中だけにあるなら、神より大きい(現実にもある)ものが想像できる。",
+      "dependencies": [
+        "ANS1_P2",
+        "ANS1_P3"
+      ],
+      "source_ref": "Proslogion Cap. II / IEP Arg 1 Step 4",
+      "note": ""
+    },
+    {
+      "id": "ANS1_P5",
+      "type": "derived",
+      "title": "定義との矛盾 (超越的限界)",
+      "text_ja": "しかし、神より大きいものは想像できない。",
+      "dependencies": [
+        "ANS1_P1"
+      ],
+      "source_ref": "Proslogion Cap. II / IEP Arg 1 Premise 5",
+      "note": "ANS1_P1の神の定義から直接導かれる命題(導出)"
+    },
+    {
+      "id": "ANS1_C",
+      "type": "conclusion",
+      "title": "神の現実的存在 (論証1の結論)",
+      "text_ja": "ゆえに、神は存在する。",
+      "dependencies": [
+        "ANS1_P4",
+        "ANS1_P5"
+      ],
+      "source_ref": "Proslogion Cap. II / IEP Arg 1 Conclusion",
+      "note": "原典: Existit ergo procul dubio aliquid quo maius cogitari non valet, et in intellectu et in re."
+    },
+    {
+      "id": "ANS2_P1",
+      "type": "premise",
+      "title": "神の定義 (必然性の文脈)",
+      "text_ja": "神は、定義により、それより大きいものが想像できない存在。",
+      "dependencies": [],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Premise 1",
+      "note": ""
+    },
+    {
+      "id": "ANS2_P2",
+      "type": "premise",
+      "title": "必然的存在の優位性",
+      "text_ja": "現実に必然的に存在する存在者は、必然的には存在しない存在者より大きい。",
+      "dependencies": [],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Premise 2",
+      "note": "原典: non possit cogitari non esse; quod maius est quam quod non esse cogitari potest。『必然的存在』が完全性であるという前提。スピノザ命題11と比較(解釈)"
+    },
+    {
+      "id": "ANS2_P3",
+      "type": "derived",
+      "title": "必然性帰謬の条件節",
+      "text_ja": "神が観念として心の中にあるが、必然的には存在しないなら、神より大きいものが想像できる。",
+      "dependencies": [
+        "ANS2_P1",
+        "ANS2_P2"
+      ],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Step 3",
+      "note": ""
+    },
+    {
+      "id": "ANS2_P4",
+      "type": "derived",
+      "title": "必然性定義との矛盾",
+      "text_ja": "しかし、神より大きいものは想像できない。",
+      "dependencies": [
+        "ANS2_P1"
+      ],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Premise 4",
+      "note": "ANS2_P1の神の定義から直接導かれる命題(導出)"
+    },
+    {
+      "id": "ANS2_P5",
+      "type": "derived",
+      "title": "必然性の条件付き導出",
+      "text_ja": "ゆえに、神が観念として心の中にあるなら、神は現実に必然的に存在する。",
+      "dependencies": [
+        "ANS2_P3",
+        "ANS2_P4"
+      ],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Step 5",
+      "note": ""
+    },
+    {
+      "id": "ANS2_P6",
+      "type": "premise",
+      "title": "神の観念の心内実在性 (論証2)",
+      "text_ja": "神は観念として心の中にある。",
+      "dependencies": [],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Premise 6",
+      "note": "論証1の ANS1_P2 と同一命題"
+    },
+    {
+      "id": "ANS2_C",
+      "type": "conclusion",
+      "title": "神の必然的存在 (論証2の結論)",
+      "text_ja": "ゆえに、神は現実に必然的に存在する。",
+      "dependencies": [
+        "ANS2_P5",
+        "ANS2_P6"
+      ],
+      "source_ref": "Proslogion Cap. III / IEP Arg 2 Conclusion",
+      "note": "原典: Sic ergo vere est aliquid quo maius cogitari non potest, ut nec cogitari possit non esse: et hoc es tu, Domine Deus noster."
+    }
+  ]
+}

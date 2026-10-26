@@ -1,0 +1,271 @@
+{
+  "system": "Descartes_2R",
+  "title": "デカルト『第二答弁』末尾の幾何学的叙述(神の存在と魂・体の区別の論証)",
+  "description": "デカルト『第二答弁』末尾の幾何学的叙述(神の存在と魂・体の区別の論証)。AT VII 160-170 ラテン語原典照合済み版。",
+  "version": "1.0",
+  "status": "verified_against_at_vii",
+  "primary_source": "Adam & Tannery (AT) VII, pp. 160-170",
+  "nodes": [
+    {
+      "id": "DES_DEF_1",
+      "type": "definition",
+      "title": "思考 (Cogitatio)",
+      "text_ja": "思考とは、私たちが直接に意識しているもの全て(意志・知性・想像・感覚の働きを含む)。",
+      "dependencies": [],
+      "source_ref": "AT VII 160",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_2",
+      "type": "definition",
+      "title": "観念 (Idea)",
+      "text_ja": "観念とは、その直接の知覚によって、その思考そのものを意識できる、思考の形式。",
+      "dependencies": [],
+      "source_ref": "AT VII 160",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_3",
+      "type": "definition",
+      "title": "観念の表象的実在性 (Realitas objectiva)",
+      "text_ja": "観念の表象的実在性とは、観念が表すものの存在が、観念の中にある限りでのあり方。",
+      "dependencies": [],
+      "source_ref": "AT VII 161",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_4",
+      "type": "definition",
+      "title": "形相的・優勝的 (Formaliter / Eminenter)",
+      "text_ja": "ある性質が対象に『形相的に』あるとは、知覚されるとおりにあること。『優勝的に』あるとは、知覚されるとおりではないが、それを担えるだけの完全性があること。",
+      "dependencies": [],
+      "source_ref": "AT VII 161",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_5",
+      "type": "definition",
+      "title": "実体 (Substantia)",
+      "text_ja": "実体とは、知覚される性質・属性が直接に内在する主体、またはそれによって性質が存在するもの。",
+      "dependencies": [],
+      "source_ref": "AT VII 161",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_6",
+      "type": "definition",
+      "title": "精神 (Mens)",
+      "text_ja": "精神とは、思考が直接に内在する実体。",
+      "dependencies": [],
+      "source_ref": "AT VII 161",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_7",
+      "type": "definition",
+      "title": "物体 (Corpus)",
+      "text_ja": "物体とは、延長や形や場所や運動などが直接に内在する実体。",
+      "dependencies": [],
+      "source_ref": "AT VII 161",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_8",
+      "type": "definition",
+      "title": "神 (Deus)",
+      "text_ja": "神とは、最高に完全であり、いかなる欠陥も含まない実体。",
+      "dependencies": [],
+      "source_ref": "AT VII 162",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_9",
+      "type": "definition",
+      "title": "実在的区別 (Distinctio realis)",
+      "text_ja": "二つの実体が実在的に区別されるとは、一方が他方なしに存在できること。",
+      "dependencies": [],
+      "source_ref": "AT VII 162",
+      "note": ""
+    },
+    {
+      "id": "DES_DEF_10",
+      "type": "definition",
+      "title": "思惟と延長の主要属性",
+      "text_ja": "思考は精神の主要属性であり、延長は物体の主要属性である。",
+      "dependencies": [],
+      "source_ref": "AT VII 162",
+      "note": ""
+    },
+    {
+      "id": "DES_POST_2",
+      "type": "postulate",
+      "title": "知覚の注意 (Attention to perception)",
+      "text_ja": "知覚の注意を払うこと。",
+      "dependencies": [],
+      "source_ref": "AT VII 162-164",
+      "note": "要請1,3,4,6,7は未登録"
+    },
+    {
+      "id": "DES_AX_1",
+      "type": "axiom",
+      "title": "無からの無 (Ex nihilo nihil fit)",
+      "text_ja": "何ものも無からは生じない。",
+      "dependencies": [],
+      "source_ref": "AT VII 164",
+      "note": "充足理由律の系統"
+    },
+    {
+      "id": "DES_AX_2",
+      "type": "axiom",
+      "title": "原因の実在性 (Reality in cause)",
+      "text_ja": "結果に含まれる実在性は、形相的または優勝的に原因に含まれなければならない。",
+      "dependencies": [],
+      "source_ref": "AT VII 165",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_3",
+      "type": "axiom",
+      "title": "無からの自己保存不能",
+      "text_ja": "何ものも無から自己を保存することはできない。",
+      "dependencies": [],
+      "source_ref": "AT VII 165",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_4",
+      "type": "axiom",
+      "title": "保存と創造の同一性",
+      "text_ja": "事物を保存するためには、それを最初に創造したのと同じだけの力と働きが必要である。",
+      "dependencies": [],
+      "source_ref": "AT VII 165",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_5",
+      "type": "axiom",
+      "title": "観念の表象的原因",
+      "text_ja": "観念の表象的実在性は、同じ実在性を、表象的にだけでなく、形相的または優勝的に含む原因を必要とする。",
+      "dependencies": [],
+      "source_ref": "AT VII 165",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_6",
+      "type": "axiom",
+      "title": "実在性の段階 (Degrees of reality)",
+      "text_ja": "実在性には段階がある。実体は偶有性より、無限の実体は有限の実体より、多くの実在性をもつ。",
+      "dependencies": [],
+      "source_ref": "AT VII 165",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_7",
+      "type": "axiom",
+      "title": "完全性への意志",
+      "text_ja": "思考するものの意志は、明晰に知る善へ向かう。自分に欠けた完全性を知り、できるなら、それを自分に与える。",
+      "dependencies": [],
+      "source_ref": "AT VII 166",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_8",
+      "type": "axiom",
+      "title": "大から小への能力推論",
+      "text_ja": "より大きなこと、より困難なことをなせるものは、より小さなこともなせる。",
+      "dependencies": [],
+      "source_ref": "AT VII 166",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_9",
+      "type": "axiom",
+      "title": "実体と属性の創造・保存格差",
+      "text_ja": "実体を作り保存することは、その属性を作り保存することより大きい。ただし、作ることが保存することより大きいわけではない。",
+      "dependencies": [],
+      "source_ref": "AT VII 166",
+      "note": ""
+    },
+    {
+      "id": "DES_AX_10",
+      "type": "axiom",
+      "title": "観念に含まれる存在",
+      "text_ja": "存在は、あらゆるものの観念に含まれる。有限なものの概念には可能的・偶然的な存在が、最高に完全な存在者の概念には必然的で完全な存在が含まれる。",
+      "dependencies": [],
+      "source_ref": "AT VII 166",
+      "note": "カントの『存在は述語ではない』批判の対象になりうる(解釈)"
+    },
+    {
+      "id": "DES_PROP_1",
+      "type": "proposition",
+      "title": "神の存在の本質的認知 (命題1)",
+      "text_ja": "神の存在は、神の本性を考えるだけで知られる。",
+      "dependencies": [
+        "DES_DEF_9",
+        "DES_AX_10"
+      ],
+      "source_ref": "AT VII 166",
+      "note": ""
+    },
+    {
+      "id": "DES_PROP_2",
+      "type": "proposition",
+      "title": "神の観念からの後天的存在証明 (命題2)",
+      "text_ja": "神の存在は、神の観念が私たちにあるという事実から、後天的に証明される。",
+      "dependencies": [
+        "DES_AX_5",
+        "DES_DEF_2",
+        "DES_DEF_8",
+        "DES_AX_6",
+        "DES_AX_3"
+      ],
+      "source_ref": "AT VII 167",
+      "note": "AT VII 167 本文『per def. 2 & 8』に準拠。英訳の Def. VII (物体) は誤記と判断し除外(AIによる照合、人の確認前)"
+    },
+    {
+      "id": "DES_PROP_3",
+      "type": "proposition",
+      "title": "自己の存在からの神の存在証明 (命題3)",
+      "text_ja": "神の存在は、神の観念をもつ私たち自身が存在することからも証明される。",
+      "dependencies": [
+        "DES_AX_1",
+        "DES_AX_2",
+        "DES_AX_4",
+        "DES_AX_7",
+        "DES_AX_8",
+        "DES_AX_9",
+        "DES_DEF_2",
+        "DES_DEF_8"
+      ],
+      "source_ref": "AT VII 167-168",
+      "note": ""
+    },
+    {
+      "id": "DES_COR_3",
+      "type": "corollary",
+      "title": "万物の創造と知覚の真理性 (命題3の系)",
+      "text_ja": "神は天地と万物を創造した。また、私たちが明晰に知覚することを、知覚どおりに成し遂げられる。",
+      "dependencies": [
+        "DES_PROP_3"
+      ],
+      "source_ref": "AT VII 168",
+      "note": ""
+    },
+    {
+      "id": "DES_PROP_4",
+      "type": "proposition",
+      "title": "心身の実在的区別 (命題4)",
+      "text_ja": "心と体は実在的に区別される。",
+      "dependencies": [
+        "DES_COR_3",
+        "DES_POST_2",
+        "DES_DEF_10",
+        "DES_DEF_5",
+        "DES_DEF_6",
+        "DES_DEF_7"
+      ],
+      "source_ref": "AT VII 169",
+      "note": "スピノザ PROP_14(神のほかに実体はない)との対立候補。実体概念の対応づけは解釈"
+    }
+  ]
+}

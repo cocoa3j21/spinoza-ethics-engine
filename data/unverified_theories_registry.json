@@ -1,0 +1,34 @@
+{
+  "title": "未照合哲学体系 隔離台帳 (Unverified Theories Registry)",
+  "description": "原典（一次文献）との照合が未完了であるため、推論エンジンの評価対象データセットから隔離された体系一覧。結果一覧には含めない。",
+  "status": "draft_unverified",
+  "policy": "原典照合（一次文献の底本・版・テキスト対照）が完了するまで、engineによる自動推論・ベンチマークの入力には含めない。",
+  "unverified_works": [
+    {
+      "work_id": "MAL_PLA",
+      "title": "マルコム(1960)およびプランティンガ(1974)の様相論証",
+      "tags": [
+        "神の存在",
+        "必然性",
+        "様相論理"
+      ],
+      "source_nature": "二次文献の要約（IEP 'Anselm: Ontological Argument'）",
+      "verification_status": "未確認 (unverified)",
+      "unverified_reason": "Norman Malcolm (1960) および Alvin Plantinga (1974) の一次文献テキスト、ならびに様相論理S5公理系との厳密な照合が未了のため隔離。",
+      "node_count": 9
+    },
+    {
+      "work_id": "CLK_DEM",
+      "title": "サミュエル・クラーク『神の存在と属性の論証』命題1-3(1704)",
+      "tags": [
+        "神の存在",
+        "必然性",
+        "充足理由律"
+      ],
+      "source_nature": "Jonathan Bennett による earlymoderntexts 版（現代英語改編版）",
+      "verification_status": "未確認 (unverified)",
+      "unverified_reason": "Bennett版は現代の読者向けに語句・構文が改変されている（同版冒頭に明記）。1704年初版原文（英語・ラテン語）との対照校訂が未了のため隔離。",
+      "node_count": 4
+    }
+  ]
+}

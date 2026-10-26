@@ -155,3 +155,64 @@ AIが記憶からラテン語テキストを出力した初期データにおい
   - 修正: 格変化（*diversa* 中性複数対格）および原本の語順に訂正。
 * **命題5 (`PROP_5`) の前提配線訂正**:
   - 原典本文（Gebhardt II, S. 48）の「*Demonstr. Si darentur plures distinctae, deberent inter se distingui, vel ex diversitate attributorum (per Prop. 4), vel ex diversitate affectionum (per Prop. 1). Si tantum ex diversitate attributorum, dabitur ergo tantum una ejusdem attributi (per Ax. 6)...*」に対照し、初期データに混入していた `DEF_6` を除外し、本文が明示引用する `PROP_4, PROP_1, DEF_3, AX_6` に完全準拠させて再配線。
+
+---
+
+## 6. 新規哲学体系の原典照合記録（デカルト・アンセルムス）
+
+* **照合実施日**: 2026-10-26
+* **照合実施者**: AI (Antigravity / Google DeepMind)
+* **照合方針**: 実際に原典（ラテン語底本）と対照した項目のみを「照合済み（verified）」として推論エンジン用データに変換し、未照合の項目は「未確認（unverified）」として隔離台帳で管理する。
+
+### (1) デカルト『省察』第二答弁末尾（幾何学的証明形式による神の存在論証）
+1. **参照底本・出典**:
+   - 書誌: *Oeuvres de Descartes*, publiées par Charles Adam & Paul Tannery (AT), Vol. VII: *Meditationes de prima philosophia*, Appendix: *Rationes Dei existentiam et animae a corpore distinctionem probantes, more geometrico dispositae*, pp. 160–170 (Paris: Léopold Cerf, 1904).
+   - 参照デジタルファクシミリ: Internet Archive (AT VII, pp. 160–170, `https://archive.org/details/oeuvresdedescart07desc/page/160/mode/2up`) および Latin Wikisource (`https://la.wikisource.org/wiki/Livre:Descartes_-_%C5%92uvres,_%C3%A9d._Adam_et_Tannery,_VII.djvu`)。
+2. **命題2 (`DES_PROP_2`) の依存関係校訂**:
+   - 調査論点: 英語抜粋（Donald Cress 訳等）において命題2の証明引用が「Defs. II and VII」とされているが、Def. VII（物体/Corpus）か Def. VIII（神/Deus）かの確認。
+   - 原典ラテン語テキスト (AT VII, p. 167):
+     > *Habemus autem in nobis ideam Dei (per def. 2 & 8), cujusque ideae realitas objectiva nec formaliter nec eminenter in nobis continetur (per ax. 6), nec in ullo alio praeterquam in ipso Deo potest contineri (per def. 8)... (per ax. 3)*
+   - 照合結果 (AIによる照合、人の確認前):
+     原典本文において明示されている引用記法は **`def. 2 & 8`** となっている。Def. VII は物体の定義であり、神の観念を論じる命題2の文脈には現れない。英訳における「II and VII」は、ローマ数字のタイポ（VIII と VII の混同・脱落）による誤記と考えられる（AIによる照合、人の確認前）。
+   - 配線修正 (AIによる照合、人の確認前):
+     `DES_PROP_2` の依存ノードから `DES_DEF_7` を除外し、原典記述に沿って `["DES_AX_5", "DES_DEF_2", "DES_DEF_8", "DES_AX_6", "DES_AX_3"]` とする（AIによる照合、人の確認前）。
+3. **その他の命題・系の照合結果**:
+   - `DES_PROP_1`: `DES_DEF_9, DES_AX_10`（AT VII, p. 166 と一致）
+   - `DES_PROP_3`: `DES_AX_1, DES_AX_2, DES_AX_4, DES_AX_7, DES_AX_8, DES_AX_9, DES_DEF_2, DES_DEF_8`（AT VII, pp. 167–168 と一致）
+   - `DES_COR_3`: `DES_PROP_3`（AT VII, p. 168 と一致）
+   - `DES_PROP_4`: `DES_COR_3, DES_POST_2, DES_DEF_10, DES_DEF_5, DES_DEF_6, DES_DEF_7`（AT VII, p. 169 と一致）
+
+### (2) アンセルムス『プロスロギオン』2-3章
+1. **参照底本・出典**:
+   - 書誌: S. Anselmi Cantuariensis *Proslogion*, Capitula II & III.
+   - 参照テキスト: The Latin Library (`https://www.thelatinlibrary.com/anselmproslogion.html`) および Jacques-Paul Migne, *Patrologia Latina*, Tomus 158, col. 227–228.
+2. **ノード構成方針と内訳 (全13ノード)**:
+   - 原典の構造: 原典は連続した祈祷・瞑想文および愚者との対話形式で執筆されている。
+   - 形式化方針: IEP標準形（Internet Encyclopedia of Philosophy "Anselm: Ontological Argument"）の2論証構成を基準とし、前提（premise）・導出命題（derived）・最終結論（conclusion）を省略・統合せず、原典の論理的連鎖（13ステップ）を忠実に独立ノードとして登録した（論証2の `ANS2_P5`, `ANS2_P6` を完全復元）。
+   - 内訳（全13ノード: 前提6, 導出5, 結論2）:
+     - 備考: ANS1_P5 および ANS2_P4 は、定義 P1（それより大きいものが想像できない存在）に依存して導かれる命題であるため、種別を「導出（derived）」として整理。
+     - **論証1（第2章: 神の実在論証 / 計6ノード）**:
+       - 前提（premise）3件: ANS1_P1（神の定義）, ANS1_P2（観念の心内存在）, ANS1_P3（実在の優位性）
+       - 導出（derived）2件: ANS1_P4（帰謬法の条件節、依存: P2, P3）, ANS1_P5（定義との矛盾・限界、依存: P1）
+       - 結論（conclusion）1件: ANS1_C（神の現実的存在、依存: P4, P5）
+     - **論証2（第3章: 神の必然的存在論証 / 計7ノード）**:
+       - 前提（premise）3件: ANS2_P1（神の定義・必然性）, ANS2_P2（必然的存在の優位性）, ANS2_P6（観念の心内存在）
+       - 導出（derived）3件: ANS2_P3（必然性帰謬の条件節、依存: P1, P2）, ANS2_P4（定義との矛盾・必然性、依存: P1）, ANS2_P5（必然性の条件付き導出、依存: P3, P4）
+       - 結論（conclusion）1件: ANS2_C（神の必然的存在、依存: P5, P6）
+3. **IEP（Internet Encyclopedia of Philosophy）標準形との差異記録**:
+   - 文脈・論述構造の差異:
+     - 原典: 神への呼びかけ・祈祷（*Ergo, Domine, qui das fidei intellectum...*）の形式をとり、詩篇の「愚者（insipiens）」との対話を通じて、「心の中にある（*in intellectu*）」ことと「現実に実在する（*in re*）」ことの対比（画家の構想と完成作の比喩）から帰謬法（Reductio ad absurdum）を展開する。
+     - IEP標準形: 20世紀の分析哲学における命題論理的スタイル（前提 P1〜P5 → 結論 C）に完全に再構成・抽象化されている。
+   - 第2章（論証1: 存在は完全性の属性）の差異:
+     - 原典: *Si enim vel in solo intellectu est, potest cogitari esse et in re: quod maius est.*（もし心の中にのみあるとすれば、現実にもあると考えられうる。そしてその方がより大である。）
+     - IEPの再構成: `ANS1_P3` として「心の中と現実の両方にある存在は、心の中だけにある存在よりも大である」という命題的公理として定式化している。カント批判（「存在は実在的述語ではない」）が向けられる前提となるのは、この二次文献的定式化である。
+   - 第3章（論証2: 必然的存在）の差異:
+     - 原典: *Quod utique sic vere est, ut nec cogitari possit non esse. Nam potest cogitari esse aliquid, quod non possit cogitari non esse; quod maius est quam quod non esse cogitari potest.*（それは存在しないことが考えられないほど真に存在する。なぜなら、存在しないことが考えられないような何かが存在すると考えられうるのであり、それは存在しないことが考えられるものよりも大だからである。）
+     - IEPの再構成: `ANS2_P2`「現実に必然的に存在する存在者は、必然的には存在しない存在者より大きい」という様相論理的完全性公理に還元している（Malcolm 1960の解釈系統）。
+
+### (3) 未照合体系の隔離記録
+以下の体系は原典（一次文献）との照合が未了であるため、エンジンの推論対象データセットには含めず、未確認台帳（`data/unverified_theories_registry.json`）に隔離保存する：
+* **`MAL_PLA`（マルコム・プランティンガの様相論証）**:
+  - Norman Malcolm (1960) および Alvin Plantinga (1974) の二次文献要約に基づく。一次文献の定式化および様相公理体系（S5等）との厳密な照合が未了。
+* **`CLK_DEM`（クラーク『神の存在と属性の論証』）**:
+  - Samuel Clarke (1704) の論証。Jonathan Bennett による earlymoderntexts 版（現代英語改編版）を参照しており、Bennett自身が注記しているように原文の語句が変更されているため、1704年初版ラテン語/英語原文との厳密な照合が未了。
